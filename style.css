@@ -63,7 +63,6 @@ body{
     padding: 0.8rem;
     border-radius: 20px;
     border: 0;
-
 }
 
 #userInput{
@@ -74,5 +73,7 @@ body{
     margin: 0.5rem;
     height: 1.7rem;
     border-radius: 20px;
+    border: 1.2px solid #000000;
+
 
 }
