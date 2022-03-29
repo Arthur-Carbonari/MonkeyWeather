@@ -61,6 +61,8 @@ body{
     border-top: 0;
     height: 4rem;
     background-color: #fdf7ad;
+    background-color: rgba(153, 153, 102,0.7);
+    color: #ffffff;
 }
 
 #sendButton{
