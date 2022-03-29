@@ -41,3 +41,7 @@ body{
     width:50%;
     margin: 1rem;
 }
+
+#botText{
+    display: inline;
+}
