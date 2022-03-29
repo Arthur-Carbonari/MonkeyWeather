@@ -54,3 +54,11 @@ body{
     border: 1px solid black;
     height: 4rem;
 }
+
+#sendButton{
+    position: absolute;
+    right: 11px;
+    top: 9px;
+    z-index: 1;
+    padding: 0.8rem;
+}
