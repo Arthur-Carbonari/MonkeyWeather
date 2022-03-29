@@ -45,3 +45,12 @@ body{
 #botText{
     display: inline;
 }
+
+#sendText{
+    margin: auto;
+    width: 60%;
+    margin-top: 0;
+    position: relative;
+    border: 1px solid black;
+    height: 4rem;
+}
