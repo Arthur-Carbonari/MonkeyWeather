@@ -1,0 +1,12 @@
+body{
+    font-family:" Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    padding:0;
+    margin:0;
+  }
+  
+#main{
+  margin: 0 auto;
+  width:90%;
+  padding: 1rem;
+  line-height: 1.5rem;
+}
