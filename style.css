@@ -20,6 +20,9 @@ body{
     flex-direction: column;
     background-image: url("backgroundPattern.jpg");
     background-repeat: repeat;
+    background-size: contain;
+    overflow: hidden;
+
 }
 
 .userMessage{
