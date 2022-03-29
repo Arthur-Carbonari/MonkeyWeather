@@ -32,3 +32,12 @@ body{
 #userText{
     display: inline;
 }
+
+.botMessage{
+    align-self: flex-start;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid black;
+    width:50%;
+    margin: 1rem;
+}
