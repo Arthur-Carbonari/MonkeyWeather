@@ -74,6 +74,8 @@ body{
     height: 1.7rem;
     border-radius: 20px;
     border: 1.2px solid #000000;
+}
 
-
+#userInput:focus{ /*removes the outline border when typing inside userInput*/
+    outline: none;
 }
