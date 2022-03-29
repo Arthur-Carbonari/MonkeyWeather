@@ -3,10 +3,20 @@ body{
     padding:0;
     margin:0;
   }
-  
+
 #main{
   margin: 0 auto;
   width:90%;
   padding: 1rem;
   line-height: 1.5rem;
+}
+
+#chatBox{
+    width:60%;
+    margin: auto;
+    height: 30rem;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    background-repeat: repeat;
 }
