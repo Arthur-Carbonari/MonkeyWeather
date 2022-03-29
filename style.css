@@ -20,3 +20,11 @@ body{
     flex-direction: column;
     background-repeat: repeat;
 }
+
+.userMessage{
+    align-self: flex-end;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 1rem;
+}
