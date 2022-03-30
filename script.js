@@ -13,3 +13,12 @@ document.getElementById("sendButton").addEventListener("click", () => {
     let userInput = getUserInput(userInputField);
     processUserInput(userInput);
 });
+
+
+function processUserInput(userInput) {
+    updateChatBox(userInput, "userMessage");
+
+    botResponse = getBotResponse(userInput);
+
+    updateChatBox(botResponse, "botMessage");
+}
