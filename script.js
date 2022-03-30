@@ -44,7 +44,8 @@ function updateChatBox(text, className) {
     var newMessage = document.createElement('div');
     newMessage.textContent = text;
     newMessage.classList.add(className);
-    chatBox.appendChild(newMessage);           
+    chatBox.appendChild(newMessage);
+    chatBox.scrollTop = chatBox.scrollHeight;           
 }
 
 async function getBotResponse(userInput, requestNumber) {
