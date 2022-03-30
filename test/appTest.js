@@ -66,3 +66,19 @@ function updateRecomendations(processedWeatherData, clothesRecomendations) {
 }
 
 exports.updateRecomendations = updateRecomendations;
+
+
+function checkIfRainClothesAreNeeded(processedWeatherData) {
+
+    let rainClothesAreNeeded = false;
+
+    processedWeatherData.forEach(element => {
+
+        if (element.weather === "Rain") rainClothesAreNeeded = true;
+
+    });
+    
+    return rainClothesAreNeeded;
+}
+
+exports.checkIfRainClothesAreNeeded = checkIfRainClothesAreNeeded;
