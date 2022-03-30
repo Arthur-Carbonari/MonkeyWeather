@@ -223,3 +223,14 @@ QUnit.test("checkIfClothesAreNeededAccordingToTemperature1", assert => {
     assert.true(weatherApp.checkIfClothesAreNeededAccordingToTemperature(mockProcessedWeatherData, 0, 23));
     
 })
+
+
+QUnit.test("checkIfClothesAreNeededAccordingToTemperature2", assert => {
+    //mock object
+
+    let mockProcessedWeatherData = [{ time: '2020-03-01 06:00:00', tempFellsLike: -10, weather: 'Sunny' }];
+
+
+    assert.true(weatherApp.checkIfClothesAreNeededAccordingToTemperature(mockProcessedWeatherData, -100, 10));
+    
+})
