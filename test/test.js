@@ -17,3 +17,11 @@ QUnit.test("getUserInput2", assert => {
 
     assert.notEqual(weatherApp.getUserInput(userInputField), "is_it_equal");
 })
+
+QUnit.test("getUserInput3", assert => {
+    let userInputField = {
+        value: "london"
+    };
+
+    assert.equal(weatherApp.getUserInput(userInputField), "london");
+})
