@@ -323,3 +323,24 @@ QUnit.test("processWeatherData2", assert => {
 
     assert.notDeepEqual(weatherApp.processWeatherData(input, date), expectedResult);
 })
+
+//clothesMessage tests==============================================================================================
+
+QUnit.test("clothesMessage1", assert => {
+    //mock object
+
+    let mokeClothesRecomendations = {
+        rainClothes: true,
+        winterClothes: false,
+        coldClothes: false,
+        chillyClothes: false,
+        mildClothes: false,
+        warmClothes: false,
+        summerClothes: false
+    };
+
+    let expectedResult = "You will need rainy weather clothes, make sure u bring all the clothes you need. Have a nice trip."
+
+    assert.equal(weatherApp.clothesMessage(mokeClothesRecomendations),expectedResult);
+
+})
