@@ -4,6 +4,18 @@ const userInputField = document.getElementById("userInput");
 let requestNumber = 0;
 let expectingDestinationsNames = false;
 
+let clothesRecomendations = {
+    rainClothes: false,
+    winterClothes: false,
+    coldClothes: false,
+    chillyClothes: false,
+    mildClothes: false,
+    warmClothes: false,
+    summerClothes: false
+};
+
+
+
 userInputField.addEventListener("keydown", function (e) {
     if (e.code == "Enter") {
         let userInput = getUserInput(userInputField);
