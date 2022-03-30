@@ -19,3 +19,20 @@ function getNumberForecastsUntilTomorrow(date) {
 }
 
 exports.getNumberForecastsUntilTomorrow = getNumberForecastsUntilTomorrow;
+
+
+function getWeatherDataForTheNextThreeDays(weatherData, numberOfForecastsUntilTomorrow) {
+    let forecastsInADay = 24 / 3;
+    let forecastsInNextThreeDays = forecastsInADay * 3;
+    let n = numberOfForecastsUntilTomorrow;
+    let weatherDataForTheNextThreeDays = [];
+
+    for (let i = 0; i < forecastsInNextThreeDays; i++) {
+        if(weatherData.list[numberOfForecastsUntilTomorrow + i] == null) continue;
+        weatherDataForTheNextThreeDays.push( weatherData.list[n + i]) ;
+    }
+
+    return weatherDataForTheNextThreeDays;
+}
+
+exports.getWeatherDataForTheNextThreeDays = getWeatherDataForTheNextThreeDays;
