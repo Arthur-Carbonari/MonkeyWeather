@@ -22,3 +22,10 @@ function processUserInput(userInput) {
 
     updateChatBox(botResponse, "botMessage");
 }
+
+function updateChatBox(text, className) {
+    var newMessage = document.createElement('div');
+    newMessage.textContent = text;
+    newMessage.classList.add(className);
+    chatBox.appendChild(newMessage);           
+}
