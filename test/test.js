@@ -255,6 +255,7 @@ QUnit.test("checkIfClothesAreNeededAccordingToTemperature4", assert => {
 })
 
 //processWeatherData tests ====================================================================================================
+
 QUnit.test("processWeatherData1", assert => {
     //Mock Objects
     let mockWeatherDate0 = { dt_txt: "2020-02-01 23:00:00", main: { feels_like: 2.0 }, weather: [{ main: "Rain" }] };
@@ -287,4 +288,38 @@ QUnit.test("processWeatherData1", assert => {
     { time: '2020-03-01 18:00:00', tempFellsLike: 21, weather: 'Sunny' }]
 
     assert.deepEqual(weatherApp.processWeatherData(input, date), expectedResult);
+})
+
+QUnit.test("processWeatherData2", assert => {
+    //Mock Objects
+    let mockWeatherDate0 = { dt_txt: "2020-02-01 23:00:00", main: { feels_like: 2.0 }, weather: [{ main: "Rain" }] };
+
+    let mockWeatherDate1 = { dt_txt: "2020-03-01 00:00:00", main: { feels_like: 2.0 }, weather: [{ main: "Rain" }] };
+
+    let mockWeatherDate2 = { dt_txt: "2020-03-01 03:00:00", main: { feels_like: 16.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherDate3 = { dt_txt: "2020-03-01 06:00:00", main: { feels_like: 21.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherDate4 = { dt_txt: "2020-03-01 09:00:00", main: { feels_like: 26.0 }, weather: [{ main: "Rain" }] };
+
+    let mockWeatherDate5 = { dt_txt: "2020-03-01 12:00:00", main: { feels_like: 31.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherDate6 = { dt_txt: "2020-03-01 15:00:00", main: { feels_like: 21.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherDate7 = { dt_txt: "2020-03-01 18:00:00", main: { feels_like: 21.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherDate8 = { dt_txt: "2020-03-01 21:00:00", main: { feels_like: 21.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherArr = [mockWeatherDate0, mockWeatherDate1, mockWeatherDate2, mockWeatherDate3, mockWeatherDate4, mockWeatherDate5, mockWeatherDate6, mockWeatherDate7, mockWeatherDate8];
+
+    let input = { list: mockWeatherArr };
+
+    let date = new Date(2000, 6, 28, 21, 09, 7);
+
+    let expectedResult = [{ time: '2020-03-01 00:00:00', tempFellsLike: 2, weather: 'Rain' },
+    { time: '2020-03-01 06:00:00', tempFellsLike: 42, weather: 'Winter' }, //This line is not correct
+    { time: '2020-03-01 12:00:00', tempFellsLike: 31, weather: 'Sunny' },
+    { time: '2020-03-01 18:00:00', tempFellsLike: 21, weather: 'Sunny' }]
+
+    assert.notDeepEqual(weatherApp.processWeatherData(input, date), expectedResult);
 })
