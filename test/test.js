@@ -187,3 +187,14 @@ QUnit.test("checkIfRainClothesAreNeeded1",assert => {
                                 
     assert.equal(weatherApp.checkIfRainClothesAreNeeded(processedWeatherData),expectedResult);
 })
+
+QUnit.test("checkIfRainClothesAreNeeded2",assert => {
+    //Mock objects
+    let processedWeatherData = [{ time: '2020-03-01 00:00:00', tempFellsLike: 2, weather: 'Rain' },
+                                { time: '2020-03-01 06:00:00', tempFellsLike: 97, weather: 'Sunny' },
+                                { time: '2020-03-01 12:00:00', tempFellsLike: 98, weather: 'Sunny' },
+                                { time: '2020-03-01 18:00:00', tempFellsLike: 99, weather: 'Sunny' }];
+    let expectedResult = true;
+                                
+    assert.equal(weatherApp.checkIfRainClothesAreNeeded(processedWeatherData),expectedResult);
+})
