@@ -45,13 +45,13 @@ function updateChatBox(text, className) {
     chatBox.appendChild(newMessage);           
 }
 
-function getBotResponse(userInput, requestNumber) {
+async function getBotResponse(userInput, requestNumber) {
 
 
     if (expectingDestinationsNames) {
-        let weatherData = getWeatherDataFromAPI(userInput);
-        //let processedWeatherData = processWeatherData(weatherData);
-        //updateRecomendations(processedWeatherData, clothesRecomendations);
+        let weatherData = await getWeatherDataFromAPI(userInput);
+        let processedWeatherData = processWeatherData(weatherData);
+        updateRecomendations(processedWeatherData, clothesRecomendations);
 
 
         return "Thats a good choice, what will be your next destination after that?";
