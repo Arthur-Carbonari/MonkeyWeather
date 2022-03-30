@@ -82,3 +82,19 @@ function checkIfRainClothesAreNeeded(processedWeatherData) {
 }
 
 exports.checkIfRainClothesAreNeeded = checkIfRainClothesAreNeeded;
+
+
+function checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, minimum, maximum) {
+
+    let clothesAreNeeded = false;
+
+    processedWeatherData.forEach(element => {
+
+        if (minimum < element.tempFellsLike && element.tempFellsLike <= maximum) clothesAreNeeded = true;
+
+    });
+
+    return clothesAreNeeded;
+}
+
+exports.checkIfClothesAreNeededAccordingToTemperature = checkIfClothesAreNeededAccordingToTemperature;
