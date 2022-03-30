@@ -174,3 +174,16 @@ QUnit.test("updateRecommendations1", assert => {
     assert.deepEqual(weatherApp.updateRecomendations(processedWeatherData,clothesRecomendations),expectedResult)
 
 })
+
+//checkIfRainClothesAreNeeded tests=======================================================================================
+
+QUnit.test("checkIfRainClothesAreNeeded1",assert => {
+    //Mock objects
+    let processedWeatherData = [{ time: '2020-03-01 00:00:00', tempFellsLike: 2, weather: 'Sunny' },
+                                { time: '2020-03-01 06:00:00', tempFellsLike: 97, weather: 'Sunny' },
+                                { time: '2020-03-01 12:00:00', tempFellsLike: 98, weather: 'Sunny' },
+                                { time: '2020-03-01 18:00:00', tempFellsLike: 99, weather: 'Sunny' }];
+    let expectedResult = false;
+                                
+    assert.equal(weatherApp.checkIfRainClothesAreNeeded(processedWeatherData),expectedResult);
+})

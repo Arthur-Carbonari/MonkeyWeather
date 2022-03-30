@@ -36,3 +36,33 @@ function getWeatherDataForTheNextThreeDays(weatherData, numberOfForecastsUntilTo
 }
 
 exports.getWeatherDataForTheNextThreeDays = getWeatherDataForTheNextThreeDays;
+
+function updateRecomendations(processedWeatherData, clothesRecomendations) {
+
+    if (!clothesRecomendations.rainClothes) {
+        clothesRecomendations.rainClothes = checkIfRainClothesAreNeeded(processedWeatherData);
+    }
+    if (!clothesRecomendations.winterClothes) {
+        clothesRecomendations.winterClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, -100, 5);
+    }
+    if (!clothesRecomendations.coldClothes) {
+        clothesRecomendations.coldClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, 5, 15);
+
+    }
+    if (!clothesRecomendations.chillyClothes) {
+        clothesRecomendations.chillyClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, 15, 20);
+    }
+    if (!clothesRecomendations.mildClothes) {
+        clothesRecomendations.mildClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, 20, 25);
+    }
+    if (!clothesRecomendations.warmClothes) {
+        clothesRecomendations.warmClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, 25, 30);
+    }
+    if (!clothesRecomendations.summerClothes) {
+        clothesRecomendations.summerClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, 30, 100);
+    }
+    console.log(clothesRecomendations);
+    return clothesRecomendations;
+}
+
+exports.updateRecomendations = updateRecomendations;
