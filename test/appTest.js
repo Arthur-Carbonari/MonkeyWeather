@@ -121,3 +121,35 @@ function processWeatherData(weatherData, date) {
 }
 
 exports.processWeatherData = processWeatherData;
+
+
+function clothesMessage(clothesRecomendations) {
+
+    let message = "You will need ";
+    if (clothesRecomendations.rainClothes) {
+        message = message + "rainy weather clothes, ";
+    }
+    if (clothesRecomendations.winterClothes) {
+        message = message + "winter clothes, ";
+    }
+    if (clothesRecomendations.coldClothes) {
+        message = message + "cold weather clothes, ";
+
+    }
+    if (clothesRecomendations.chillyClothes) {
+        message = message + "chilly weather clothes, ";    
+    }
+    if (clothesRecomendations.mildClothes) {
+        message = message + "mild weather clothes, ";
+    }
+    if (clothesRecomendations.warmClothes) {
+        message = message + "warm weather clothes, ";
+    }
+    if (clothesRecomendations.summerClothes) {
+       message = message + "summer clothes, "
+    }
+
+    return message + "make sure u bring all the clothes you need. Have a nice trip.";
+}
+
+exports.clothesMessage = clothesMessage;
