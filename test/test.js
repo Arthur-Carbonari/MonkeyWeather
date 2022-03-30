@@ -25,3 +25,13 @@ QUnit.test("getUserInput3", assert => {
 
     assert.equal(weatherApp.getUserInput(userInputField), "london");
 })
+
+
+//getNumberForecastsUntilTomorrow tests ================================================================================
+
+QUnit.test("getNumberForecastsUntilTomorrow1", assert => {
+    let date = new Date(1993, 6, 28, 14, 39, 7);
+
+    assert.equal(weatherApp.getNumberForecastsUntilTomorrow(date), "4");
+
+})
