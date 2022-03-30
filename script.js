@@ -70,3 +70,13 @@ function getBotResponse(userInput, requestNumber) {
     return "Are you ready to select the first city you would like to visit?";
 
 }
+
+async function getWeatherDataFromAPI(city) {
+    const apiKey = "494fc1fc164a54a3b6d1a694769dce7e";
+
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`);
+
+    let weatherData = await response.json();
+
+    return await weatherData;
+}
