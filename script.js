@@ -5,6 +5,7 @@ const userInputField = document.getElementById("userInput");
 
 let requestNumber = 0;
 let expectingDestinationsNames = false;
+let numberOfLocationsSelected = 0;
 
 let clothesRecomendations = {
     rainClothes: false,
@@ -36,6 +37,7 @@ async function processUserInput(userInput) {
     updateChatBox(userInput, "userMessage");
 
     botResponse = await getBotResponse(userInput);
+    requestNumber++;
 
     updateChatBox(botResponse, "botMessage");
 }
@@ -53,7 +55,7 @@ async function getBotResponse(userInput, requestNumber) {
     if (expectingDestinationsNames) {
         let weatherData = await getWeatherDataFromAPI(userInput);
         let processedWeatherData = processWeatherData(weatherData, new Date);
-        updateRecomendations(processedWeatherData, clothesRecomendations);
+        clothesRecomendations = updateRecomendations(processedWeatherData, clothesRecomendations);
         
 
 
