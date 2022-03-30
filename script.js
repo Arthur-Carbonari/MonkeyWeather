@@ -7,3 +7,9 @@ userInputField.addEventListener("keydown", function (e) {
         processUserInput(userInput);
     }
 });
+
+document.getElementById("sendButton").addEventListener("click", () => {
+
+    let userInput = getUserInput();
+    processUserInput(userInput);
+});
