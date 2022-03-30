@@ -42,3 +42,10 @@ QUnit.test("getNumberForecastsUntilTomorrow2", assert => {
     assert.notEqual(weatherApp.getNumberForecastsUntilTomorrow(date), "6");
 
 })
+
+QUnit.test("getNumberForecastsUntilTomorrow3", assert => {
+    let date = new Date(2000, 6, 28, 21, 09, 7);
+
+    assert.equal(weatherApp.getNumberForecastsUntilTomorrow(date), "1");
+
+})
