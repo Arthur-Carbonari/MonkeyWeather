@@ -1,3 +1,5 @@
+const { processWeatherData } = require("./test/appTest");
+
 const chatBox = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
 
@@ -50,8 +52,9 @@ async function getBotResponse(userInput, requestNumber) {
 
     if (expectingDestinationsNames) {
         let weatherData = await getWeatherDataFromAPI(userInput);
-        let processedWeatherData = processWeatherData(weatherData);
+        let processedWeatherData = processWeatherData(weatherData, new Date);
         updateRecomendations(processedWeatherData, clothesRecomendations);
+        
 
 
         return "Thats a good choice, what will be your next destination after that?";
