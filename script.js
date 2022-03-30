@@ -1,6 +1,9 @@
 const chatBox = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
 
+let requestNumber = 0;
+let expectingDestinationsNames = false;
+
 userInputField.addEventListener("keydown", function (e) {
     if (e.code == "Enter") {
         let userInput = getUserInput(userInputField);
@@ -29,3 +32,4 @@ function updateChatBox(text, className) {
     newMessage.classList.add(className);
     chatBox.appendChild(newMessage);           
 }
+
