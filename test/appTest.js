@@ -98,3 +98,26 @@ function checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, min
 }
 
 exports.checkIfClothesAreNeededAccordingToTemperature = checkIfClothesAreNeededAccordingToTemperature;
+
+
+function processWeatherData(weatherData, date) {
+
+    let numberOfForecastsUntilTomorrow = getNumberForecastsUntilTomorrow(date);
+    let weatherDataForTheNextThreeDays = getWeatherDataForTheNextThreeDays(weatherData, numberOfForecastsUntilTomorrow);
+
+    let processedData = [];
+
+    for (let i = 0; i < weatherDataForTheNextThreeDays.length; i = i + 2) {
+
+        processedData.push({
+            time: weatherDataForTheNextThreeDays[i].dt_txt,
+            tempFellsLike: weatherDataForTheNextThreeDays[i].main.feels_like,
+            weather: weatherDataForTheNextThreeDays[i].weather[0].main
+        });
+    }
+
+    console.log(processedData);
+    return processedData;
+}
+
+exports.processWeatherData = processWeatherData;
