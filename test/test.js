@@ -344,3 +344,22 @@ QUnit.test("clothesMessage1", assert => {
     assert.equal(weatherApp.clothesMessage(mokeClothesRecomendations),expectedResult);
 
 })
+
+QUnit.test("clothesMessage2", assert => {
+    //mock object
+
+    let mokeClothesRecomendations = {
+        rainClothes: true,
+        winterClothes: false,
+        coldClothes: false,
+        chillyClothes: false,
+        mildClothes: true,
+        warmClothes: false,
+        summerClothes: false
+    };
+
+    let expectedResult = "You will need rainy weather clothes, mild weather clothes, make sure u bring all the clothes you need. Have a nice trip."
+
+    assert.equal(weatherApp.clothesMessage(mokeClothesRecomendations),expectedResult);
+
+})
