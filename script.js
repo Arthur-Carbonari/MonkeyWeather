@@ -30,10 +30,10 @@ document.getElementById("sendButton").addEventListener("click", () => {
 });
 
 
-function processUserInput(userInput) {
+async function processUserInput(userInput) {
     updateChatBox(userInput, "userMessage");
 
-    botResponse = getBotResponse(userInput);
+    botResponse = await getBotResponse(userInput);
 
     updateChatBox(botResponse, "botMessage");
 }
