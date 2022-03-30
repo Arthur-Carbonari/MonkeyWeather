@@ -80,3 +80,33 @@ QUnit.test("getWeatherDataForTheNextThreeDays1", assert => {
 
     assert.deepEqual(weatherApp.getWeatherDataForTheNextThreeDays(input, 1), expectedResult);
 })
+
+QUnit.test("getWeatherDataForTheNextThreeDays2", assert => {
+
+    //Mock Objects
+    let mockWeatherDate0 = { dt_txt: "2020-02-01 23:00:00", main: { feels_like: 2.0 }, weather: [{ main: "Rain" }] };
+
+    let mockWeatherDate1 = { dt_txt: "2020-03-01 00:00:00", main: { feels_like: 2.0 }, weather: [{ main: "Rain" }] };
+
+    let mockWeatherDate2 = { dt_txt: "2020-03-01 03:00:00", main: { feels_like: 16.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherDate3 = { dt_txt: "2020-03-01 06:00:00", main: { feels_like: 21.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherDate4 = { dt_txt: "2020-03-01 09:00:00", main: { feels_like: 26.0 }, weather: [{ main: "Rain" }] };
+
+    let mockWeatherDate5 = { dt_txt: "2020-03-01 12:00:00", main: { feels_like: 31.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherDate6 = { dt_txt: "2020-03-01 15:00:00", main: { feels_like: 21.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherDate7 = { dt_txt: "2020-03-01 18:00:00", main: { feels_like: 21.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherDate8 = { dt_txt: "2020-03-01 21:00:00", main: { feels_like: 21.0 }, weather: [{ main: "Sunny" }] };
+
+    let mockWeatherArr = [mockWeatherDate0, mockWeatherDate1, mockWeatherDate2, mockWeatherDate3, mockWeatherDate4, mockWeatherDate5, mockWeatherDate6, mockWeatherDate7, mockWeatherDate8];
+
+    let input = { list: mockWeatherArr };
+
+    let expectedResult = [mockWeatherDate3, mockWeatherDate4, mockWeatherDate2, mockWeatherDate1, mockWeatherDate5, mockWeatherDate6, mockWeatherDate7, mockWeatherDate8];
+
+    assert.notDeepEqual(weatherApp.getWeatherDataForTheNextThreeDays(input, 1), expectedResult);
+})
