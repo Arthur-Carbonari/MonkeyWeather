@@ -1,5 +1,3 @@
-const { processWeatherData } = require("./test/appTest");
-
 const chatBox = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
 
@@ -57,7 +55,9 @@ async function getBotResponse(userInput, requestNumber) {
         let processedWeatherData = processWeatherData(weatherData, new Date);
         clothesRecomendations = updateRecomendations(processedWeatherData, clothesRecomendations);
         
+        numberOfLocationsSelected++;
 
+        if(numberOfLocationsSelected == 5) return clothesMessage(clothesRecomendations);
 
         return "Thats a good choice, what will be your next destination after that?";
     }
