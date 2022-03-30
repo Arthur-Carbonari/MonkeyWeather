@@ -33,3 +33,28 @@ function updateChatBox(text, className) {
     chatBox.appendChild(newMessage);           
 }
 
+function getBotResponse(userInput, requestNumber) {
+
+
+    if (expectingDestinationsNames) {
+        let weatherData = getWeatherDataFromAPI(userInput);
+        //let processedWeatherData = processWeatherData(weatherData);
+        //updateRecomendations(processedWeatherData, clothesRecomendations);
+
+
+        return "Thats a good choice, what will be your next destination after that?";
+    }
+
+    if (!expectingDestinationsNames && userInput === "yes") {
+        expectingDestinationsNames = true;
+        return "Ok, please tell me the first location you want to visit.";
+    }
+
+    if (requestNumber > 0) {
+        console.log("here");
+        return "Ok, tell me when you are ready then..";
+    }
+
+    return "Are you ready to select the first city you would like to visit?";
+
+}
