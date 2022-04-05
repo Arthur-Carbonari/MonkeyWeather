@@ -15,7 +15,7 @@ let clothesRecomendations = {
     summerClothes: false
 };
 
-
+    
 
 userInputField.addEventListener("keydown", function (e) {
     if (e.code == "Enter") {
