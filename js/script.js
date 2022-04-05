@@ -1,8 +1,10 @@
-const chatBox = document.getElementById("chatBox");
+const messagesView = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
 
+const chatbox = new Chatbox(messagesView, userInputField);
+
 let requestNumber = 0;
-let expectingDestinationsNames = false;
+let expectingDestinationsNames = false; 
 let numberOfLocationsSelected = 0;
 
 let clothesRecomendations = {
@@ -15,23 +17,23 @@ let clothesRecomendations = {
     summerClothes: false
 };
 
-    
 
 userInputField.addEventListener("keydown", function (e) {
     if (e.code == "Enter") {
-        let userInput = getUserInput(userInputField);
-        processUserInput(userInput);
+        let userInput = chatbox.getInput();
+        handleInput(userInput);
     }
 });
 
 document.getElementById("sendButton").addEventListener("click", () => {
 
-    let userInput = getUserInput(userInputField);
-    processUserInput(userInput);
+    let userInput = chatbox.getInput();
+    handleInput(userInput);
 });
 
 
-async function processUserInput(userInput) {
+
+async function  handleInput(userInput) {
     updateChatBox(userInput, "userMessage");
 
     botResponse = await getBotResponse(userInput);
