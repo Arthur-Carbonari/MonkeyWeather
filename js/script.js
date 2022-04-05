@@ -34,12 +34,14 @@ document.getElementById("sendButton").addEventListener("click", () => {
 
 
 async function  handleInput(userInput) {
-    updateChatBox(userInput, "userMessage");
+    chatbox.updateChatbox(userInput, "userMessage");
+    chatbox.scrollChatbox();
 
     botResponse = await getBotResponse(userInput);
     requestNumber++;
 
     updateChatBox(botResponse, "botMessage");
+    chatbox.scrollChatbox();
 }
 
 function updateChatBox(text, className) {
