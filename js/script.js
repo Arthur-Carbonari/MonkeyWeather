@@ -20,16 +20,14 @@ let clothesRecomendations = {
 
 userInputField.addEventListener("keydown", function (e) {
     if (e.code == "Enter") {
-        let userInput = chatbox.getInput();
-        chatbox.emptyInputField();
+        let userInput = chatbox.retrieveInput();
         handleInput(userInput);
     }
 });
 
 document.getElementById("sendButton").addEventListener("click", () => {
 
-    let userInput = chatbox.getInput();
-    chatbox.emptyInputField();
+    let userInput = chatbox.retrieveInput();
     handleInput(userInput);
 });
 
@@ -46,13 +44,6 @@ async function  handleInput(userInput) {
     chatbox.scrollChatbox();
 }
 
-function updateChatBox(text, className) {
-    var newMessage = document.createElement('div');
-    newMessage.textContent = text;
-    newMessage.classList.add(className);
-    chatBox.appendChild(newMessage);
-    chatBox.scrollTop = chatBox.scrollHeight;           
-}
 
 async function getBotResponse(userInput, requestNumber) {
 

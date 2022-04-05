@@ -7,6 +7,12 @@ class Chatbox{
         this.inputField = inputField;
     }
 
+    retrieveInput(){
+        let input = this.getInput();
+        this.emptyInputField();
+        return input;
+    }
+
     getInput(){
         return this.inputField.value;
     }
