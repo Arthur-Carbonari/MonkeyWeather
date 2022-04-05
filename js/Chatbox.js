@@ -19,10 +19,10 @@ class Chatbox{
         let newMessage = document.createElement('div');
         newMessage.textContent = text;
         newMessage.classList.add(className);
+        this.chatbox.appendChild(newMessage);
     }
 
     scrollChatbox(){
-        chatbox.appendChild(newMessage);
-        chatbox.scrollTop = chatbox.scrollHeight;
+        this.chatbox.scrollTop = this.chatbox.scrollHeight;
     }
 }

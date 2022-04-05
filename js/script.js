@@ -21,6 +21,7 @@ let clothesRecomendations = {
 userInputField.addEventListener("keydown", function (e) {
     if (e.code == "Enter") {
         let userInput = chatbox.getInput();
+        chatbox.emptyInputField();
         handleInput(userInput);
     }
 });
@@ -28,6 +29,7 @@ userInputField.addEventListener("keydown", function (e) {
 document.getElementById("sendButton").addEventListener("click", () => {
 
     let userInput = chatbox.getInput();
+    chatbox.emptyInputField();
     handleInput(userInput);
 });
 
