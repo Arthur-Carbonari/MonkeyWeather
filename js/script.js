@@ -3,19 +3,16 @@ const userInputField = document.getElementById("userInput");
 
 const chatbox = new Chatbox(messagesView, userInputField);
 
+const apiKey = "494fc1fc164a54a3b6d1a694769dce7e";
+const weatherFetcher = new WeatherFetcher(apiKey);
+
+const chatbot = new Chatbot();
+
 let requestNumber = 0;
 let expectingDestinationsNames = false; 
 let numberOfLocationsSelected = 0;
 
-let clothesRecomendations = {
-    rainClothes: false,
-    winterClothes: false,
-    coldClothes: false,
-    chillyClothes: false,
-    mildClothes: false,
-    warmClothes: false,
-    summerClothes: false
-};
+
 
 
 userInputField.addEventListener("keydown", function (e) {
@@ -37,10 +34,11 @@ async function  handleInput(userInput) {
     chatbox.updateChatbox(userInput, "userMessage");
     chatbox.scrollChatbox();
 
-    botResponse = await getBotResponse(userInput);
+    //botResponse = await getBotResponse(userInput);
+    let botResponse = await chatbot.getBotResponse(userInput);
     requestNumber++;
 
-    updateChatBox(botResponse, "botMessage");
+    chatbox.updateChatbox(botResponse, "botMessage");
     chatbox.scrollChatbox();
 }
 
@@ -49,7 +47,7 @@ async function getBotResponse(userInput, requestNumber) {
 
 
     if (expectingDestinationsNames) {
-        let weatherData = await getWeatherDataFromAPI(userInput);
+        let weatherData = await weatherFetcher.getWeatherData(userInput);
         let processedWeatherData = processWeatherData(weatherData, new Date);
         clothesRecomendations = updateRecomendations(processedWeatherData, clothesRecomendations);
         
@@ -72,14 +70,4 @@ async function getBotResponse(userInput, requestNumber) {
 
     return "Are you ready to select the first city you would like to visit?";
 
-}
-
-async function getWeatherDataFromAPI(city) {
-    const apiKey = "494fc1fc164a54a3b6d1a694769dce7e";
-
-    let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`);
-
-    let weatherData = await response.json();
-
-    return await weatherData;
 }
