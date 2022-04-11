@@ -23,7 +23,7 @@ class Chatbox{
 
     updateChatbox(text, className){
         let newMessage = document.createElement('div');
-        newMessage.textContent = text;
+        newMessage.innerHTML = text;
         newMessage.classList.add(className);
         this.chatbox.appendChild(newMessage);
     }

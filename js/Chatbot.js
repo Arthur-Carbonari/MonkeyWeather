@@ -1,19 +1,11 @@
 class Chatbot{
     
-    clothesRecomendations = {
-        rainClothes: false,
-        winterClothes: false,
-        coldClothes: false,
-        chillyClothes: false,
-        mildClothes: false,
-        warmClothes: false,
-        summerClothes: false
-    };
+    clothesRecomendations = new ClothesRecomendations();
+
+    //clothesSet = new Set();
     
     state;
-    confirmedLocations;
-    selectedLocations = [];
-    weatherFetcher = new WeatherFetcher();
+    selectedDestination = [];
 
     constructor(){
         this.state = new GreetingState(this); 
@@ -34,13 +26,13 @@ class GreetingState{
     }
 
     processInput(input){
-        this.machine.state = new MainState(this.machine);
-        return "Hi, im the weather bot, please select one of the options bellow or tell me if you want to begin with your locations.";
+        this.machine.state = new StartState(this.machine);
+        return "Hi, I'm the weather bot, please select one of the options bellow or tell me if you want to begin with your locations.";
     }
 }
 
 
-class MainState{
+class StartState{
     machine;
 
     constructor(machine){
@@ -48,116 +40,172 @@ class MainState{
     }
 
     processInput(input){
-        this.machine.state = new BookingState(this.machine);
+        this.machine.state = new LocationState(this.machine);
         return "Ok, please tell me your first location.";
     }
 }
 
-class BookingState{
+ 
+class LocationState{
     machine;
+    currentLocation = 0;
 
     constructor(machine){
         this.machine = machine;
     }
 
     async processInput(input){
-        let weatherData = await WeatherFetcher.getWeatherData(input);
-        this.machine.state = new ConfirmingState(this.machine, weatherData);
-        return "Are you sure you want to go to " + input + "?";
+        let location = await LocationFetcher.getLocation(input);
+        console.log(location);
+
+        let newState = new ConfirmingState(this.machine, location);
+        this.machine.state = newState;
+
+        return newState.statePrompt();
     }
 
 
 }
 
 
+
 class ConfirmingState{
     machine;
-    weatherData;
-    date = new Date;
+    location;
+    locationIndex = 0;
 
-    constructor(machine, weatherData){
+    constructor(machine, location){
         this.machine = machine;
-        this.weatherData = weatherData;
+        this.location = location;
     }
 
-    processInput(input){
+    async processInput(input){
+
         if(input === "yes"){
-            let parsedData = WeatherParser.parseWeatherData(this.weatherData, this.date);
-            this.machine.selectedLocations.push(parsedData);
-            this.machine.clothesRecomendations = this.updateRecomendations(parsedData, this.machine.clothesRecomendations);
+            //this.machine.state = new ForecastState(this.machine, this.location[this.locationIndex]);
+            let newState = new dateState(this.machine, this.location[this.locationIndex]);
+            this.machine.state = newState;
 
-            if(this.machine.selectedLocations.length > 4){
-                console.log(this.machine.selectedLocations);
-                this.machine.state = new RecomendationState(this.machine);
-                return "Ok thats all of them, are you satisfied with all the destinations that you choosed?"
-            }
+            return newState.statePrompt();
+        }
+        else {
+            this.locationIndex++;
+            let locationName = this.location[this.locationIndex].name;
+            return "Hmm, so do you  want to go to " + locationName + "?";
+        }
 
-            this.machine.state = new BookingState(this.machine);
-            return "i printed the data to the console, please choose your next destination.";
-        }
-        else{
-            this.machine.state = new BookingState(this.machine);
-            return "Ok, i'll forget about that one, what is your next destination then?";
-        }
+    }
+
+    statePrompt(){
+        return "Oh so do you wanna go to " + this.location[0].name + "?";
     }
 
 
-    updateRecomendations(processedWeatherData, clothesRecomendations) {
-
-        if (!clothesRecomendations.rainClothes) {
-            clothesRecomendations.rainClothes = checkIfRainClothesAreNeeded(processedWeatherData);
-        }
-        if (!clothesRecomendations.winterClothes) {
-            clothesRecomendations.winterClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, -100, 5);
-        }
-        if (!clothesRecomendations.coldClothes) {
-            clothesRecomendations.coldClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, 5, 15);
-    
-        }
-        if (!clothesRecomendations.chillyClothes) {
-            clothesRecomendations.chillyClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, 15, 20);
-        }
-        if (!clothesRecomendations.mildClothes) {
-            clothesRecomendations.mildClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, 20, 25);
-        }
-        if (!clothesRecomendations.warmClothes) {
-            clothesRecomendations.warmClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, 25, 30);
-        }
-        if (!clothesRecomendations.summerClothes) {
-            clothesRecomendations.summerClothes = checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, 30, 100);
-        }
-        console.log(clothesRecomendations);
-        return clothesRecomendations;
-    }
+}
 
 
-    checkIfRainClothesAreNeeded(processedWeatherData) {
+class dateState{
+    machine;
+    today = new Date();
+    daysOfTheTrip = 3;
+    destination;
+    selection = ["1","2","3"];
 
-        let rainClothesAreNeeded = false;
-    
-        processedWeatherData.forEach(element => {
-    
-            if (element.weather === "Rain") rainClothesAreNeeded = true;
-    
-        });
-        
-        return rainClothesAreNeeded;
+    constructor(machine, destination){
+        this.machine = machine;
+        this.destination = destination;
     }
     
-    
-    
-    checkIfClothesAreNeededAccordingToTemperature(processedWeatherData, minimum, maximum) {
-    
-        let clothesAreNeeded = false;
-    
-        processedWeatherData.forEach(element => {
-    
-            if (minimum < element.tempFellsLike && element.tempFellsLike <= maximum) clothesAreNeeded = true;
-    
-        });
-    
-        return clothesAreNeeded;
+    async processInput(input){
+        let options = InputParser.getAllNumbers(input);
+
+        console.log(options);
+
+        if(options === null) return "Please select one of the valid options";
+
+        for (let i = 0; i < options.length; i++) {
+            
+            if(!this.selection.includes(options[i])) return "Please select one of the valid options";
+        }
+
+        let newState = new ForecastState(this.machine, this.destination, options)
+        this.machine.state = newState;
+
+        return newState.statePrompt();
     }
+
+    statePrompt(){
+        let dates = this.getPossibleDates();
+        let dayOne = dates[0];
+        let dayTwo = dates[1];
+        let dayThree = dates[2];
+
+        let prompt = `Choose the day(s) you will stay at this location: <br>1 - ${dayOne} <br>2 - ${dayTwo} <br>3 - ${dayThree}`;
+
+        return prompt;
+    }
+
+    getPossibleDates(){
+        let today = this.today;
+        let nextDates = [];
+
+        for (let i = 0; i < this.daysOfTheTrip; i++) {
+
+            let nextDay = new Date();
+
+            nextDay.setDate(today.getDate() + 1 + i);
+
+            let dateSt = DateParser.toDayMonth(nextDay);
+            nextDates.push(dateSt);
+        }
+
+        return nextDates;
+    }
+
+}
+
+
+class ForecastState{
+    machine;
+    destination;
+    selectedDates;
+    
+
+    constructor(machine, destination, selectedDates){
+        this.machine = machine;
+        this.destination = destination;
+        this.selectedDates = selectedDates;
+    }
+
+    async processInput(){
+        let weatherData = await WeatherFetcher.getWeatherData(this.destination);
+        console.log(weatherData);
+        let parsedData = ForecastParser.parseForecast(weatherData, this.selectedDates);
+
+        let destination = {
+            name: this.destination.name,
+            forecast: parsedData
+        }
+
+        console.log(destination);
+
+        if(this.machine.selectedDestination.length > 4){
+            console.log(this.machine.selectedDestination);
+            this.machine.state = new RecomendationState(this.machine);
+            return "Ok thats all of them, are you satisfied with all the destinations that you choosed?"
+        }
+
+    
+    }
+
+    statePrompt(){
+        this.processInput();
+
+        this.machine.state = new LocationState(this.machine);
+        return "Ok, I have added that destination to your list.<br>Please Select your next destination.";
+
+    }
+
 }
 
 
@@ -173,9 +221,7 @@ class RecomendationState{
             return this.clothesMessage(this.machine.clothesRecomendations);
         }
 
-        
-    }
-
+    }   
 
     clothesMessage(clothesRecomendations) {
 
