@@ -4,6 +4,7 @@ class LocationFetcher{
         let response = await fetch(`https://geocode.maps.co/search?city=${locationName}&accept-language=en`);
         
         let locationData = await response.json();
+        console.log(locationData);
 
         return LocationParser.parseLocation(locationData);
     }

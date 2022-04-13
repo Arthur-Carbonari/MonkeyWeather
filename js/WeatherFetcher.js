@@ -4,6 +4,7 @@ class WeatherFetcher{
 
 
     static async getWeatherData(location){
+        console.log(location);
         //let  response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${locationName}&appid=${this.apiKey}&units=metric`);
         let response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lon}&exclude=${this.exclude}&units=metric&appid=${this.apiKey}`);
 
@@ -21,6 +22,8 @@ class ForecastParser{
     static parseForecast(forecastData, selectedDates){
 
         let parsedForecast = [];
+
+        console.log(forecastData);
 
         selectedDates.forEach(index => {
             
