@@ -35,12 +35,12 @@ class GreetingState{
 
     processInput(input){
         this.machine.state = new MainState(this.machine);
-        return "Hi, im the weather bot, please select one of the options bellow or tell me if you want to begin with your locations.";
+        return "Hi, I'm the weather bot, please select one of the options bellow or tell me if you want to begin with your locations.";
     }
 }
 
 
-class StartingState{
+class MainState{
     machine;
 
     constructor(machine){
