@@ -1,4 +1,5 @@
-
+import Chatbox from './Chatbox.js';
+import Chatbot from './Chatbot.js';
 
 const messagesView = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");

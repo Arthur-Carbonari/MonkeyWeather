@@ -1,12 +1,19 @@
-class ClothesRecomendations{
-    rainClothes = false;
-    winterClothes = false;
-    coldClothes = false;
-    chillyClothes = false;
-    mildClothes = false;
-    warmClothes = false;
-    summerClothes = false;
+export default  class ClothesRecomendations{
+    rainClothes = 0;
+    winterClothes = 0;
+    coldClothes = 0;
+    chillyClothes = 0;
+    mildClothes = 0;
+    warmClothes = 0;
+    summerClothes = 0;
 
+    updateByTemp(temp){
+
+    }
+
+    updateByWeather(weather){
+        
+    }
 
     updateRecomendations(processedWeatherData) {
 

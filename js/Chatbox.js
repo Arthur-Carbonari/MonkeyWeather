@@ -1,4 +1,4 @@
-class Chatbox{
+export default class Chatbox{
     chatbox;
     inputField;
 

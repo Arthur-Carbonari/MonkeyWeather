@@ -1,8 +1,14 @@
-class Chatbot{
+import Parser from "./Parser.js";
+import Forecast from "./Forecast.js";
+import { ForecastFetcher, LocationFetcher } from "./Fetcher.js";
+import Destination from "./Destination.js";
+import Location from "./Location.js";
+import ClothesRecomendations from "./ClothesRecomendations.js";
+
+export default class Chatbot{
     
     clothesRecomendations = new ClothesRecomendations();
 
-    //clothesSet = new Set();
     
     state;
     selectedDestination = [];   
@@ -26,8 +32,9 @@ class GreetingState{
     }
 
     execute(input){
-        this.machine.state = new StartState(this.machine);
-        return "Hi, I'm the weather bot, please select one of the selectedOptions bellow or tell me if you want to begin with your locations.";
+        let newState = new StartState(this.machine);
+        this.machine.state = newState;
+        return newState.prompt();
     }
 }
 
@@ -40,8 +47,13 @@ class StartState{
     }
 
     execute(input){
-        this.machine.state = new LocationState(this.machine);
-        return "Ok, please tell me your first location.";
+        let newState = new LocationState(this.machine);
+        this.machine.state = newState;
+        return newState.prompt();
+    }
+
+    prompt(){
+        return "Hi, I'm the weather bot, please select one of the selectedOptions bellow or tell me if you want to begin with your locations.";
     }
 }
 
@@ -55,15 +67,20 @@ class LocationState{
     }
 
     async execute(input){
-        let location = await LocationFetcher.getLocation(input);
+
+        let locationData = await LocationFetcher.getLocation(input);
+        let location = Location.getLocationsFromData(locationData);
         console.log(location);
 
         let newState = new ConfirmingLocationState(this.machine, location);
         this.machine.state = newState;
 
-        return newState.statePrompt();
+        return newState.prompt();
     }
 
+    prompt(){
+        return "Ok, please tell me your first location.";
+    }
 
 }
 
@@ -84,10 +101,10 @@ class ConfirmingLocationState{
         if(input === "yes"){
             let destination = new Destination(this.location[this.locationIndex]);
 
-            let newState = new dateState(this.machine, destination);
+            let newState = new ForecastState(this.machine, destination);
             this.machine.state = newState;
 
-            return newState.statePrompt();
+            return newState.prompt();
         }
         else {
             this.locationIndex++;
@@ -97,7 +114,7 @@ class ConfirmingLocationState{
 
     }
 
-    statePrompt(){
+    prompt(){
         return "Oh so do you wanna go to " + this.location[0].name + "?";
     }
 
@@ -105,7 +122,38 @@ class ConfirmingLocationState{
 }
 
 
-class dateState{
+class ForecastState{
+    machine;
+    destination;
+    
+
+    constructor(machine, destination){
+        this.machine = machine;
+        this.destination = destination;
+    }
+
+    async execute(){
+        let weatherData = await ForecastFetcher.getForecastData(this.destination);
+        let parsedForecast = Forecast.getForecastsFromData(weatherData);
+
+        this.destination.forecast = parsedForecast;
+    
+
+        let newState = new DateState(this.machine, this.destination);
+        this.machine.state = newState;
+        return newState.prompt();
+
+    }
+
+    prompt(){
+        return this.execute();
+    }
+
+
+}
+
+
+class DateState{
     machine;
     today = new Date();
     daysOfTheTrip = 3;
@@ -119,34 +167,36 @@ class dateState{
     
     async execute(input){
         
-        let selectedOptions = InputParser.getAllNumbers(input);
+        let selectedOptions = Parser.getAllNumbersFromString(input);
 
-        if(selectedOptions === null) return "Please select one of the valid selectedOptions";
+        if(selectedOptions === null) return "Please select one of the valid options.";
 
         for (let i = 0; i < selectedOptions.length; i++) {
             
-            if(!this.selection.includes(selectedOptions[i])) return "Please select one of the valid selectedOptions";
+            if(!this.selection.includes(selectedOptions[i])) return "Please select one of the valid options.";
         }
 
+        this.destination.selectDates(selectedOptions);
 
-        let newState = new ForecastState(this.machine, this.destination, selectedOptions);
-        this.machine.state = newState;
+        let newState = new DestinationState(this.machine, this.destination);
+        this.machine = newState;
 
-        return newState.execute();
+        return newState.prompt();
+        
     }
 
 
-    statePrompt(){
+    prompt(){
 
-        let possibleDates = this.getPossibleDates();
+        let possibleDates = this.destination.getDates();
 
         let dayOne = possibleDates[0];
         let dayTwo = possibleDates[1];
         let dayThree = possibleDates[2];
 
-        let prompt = `Choose the day(s) you will stay at this location: <br>1 - ${dayOne} <br>2 - ${dayTwo} <br>3 - ${dayThree}`;
+        let message = `Choose the day(s) you will stay at this location: <br>1 - ${dayOne} <br>2 - ${dayTwo} <br>3 - ${dayThree}`;
 
-        return prompt;
+        return message;
     }
 
     getPossibleDates(){
@@ -159,7 +209,7 @@ class dateState{
 
             nextDay.setDate(today.getDate() + 1 + i);
 
-            let dateSt = DateParser.toDayMonth(nextDay);
+            let dateSt = Parser.dateToDayMonth(nextDay);
             nextDates.push(dateSt);
         }
 
@@ -169,43 +219,40 @@ class dateState{
 }
 
 
-class ForecastState{
+class DestinationState{
     machine;
     destination;
-    selectedOptions;
-    
 
-    constructor(machine, destination, selectedOptions){
+
+    constructor(machine, destination){
         this.machine = machine;
         this.destination = destination;
-        this.selectedOptions = selectedOptions;
     }
 
-    async execute(){
-        let weatherData = await WeatherFetcher.getWeatherData(this.destination);
-        let parsedForecast = ForecastParser.parseForecast(weatherData, this.selectedOptions);
 
-        this.destination.forecast = parsedForecast;
+    execute(){
 
-        
+        this.destination.calculateClothesRecomendation();
         this.machine.selectedDestination.push(this.destination);
 
-
         if(this.machine.selectedDestination.length > 1){  // CHANGE THIS TO 4 AFTER TESTING
-            console.log(this.machine.selectedDestination);
             let newState =  new ConfirmDestinationState(this.machine);
             this.machine.state = newState;
-            return newState.statePrompt();
+            return newState.prompt();
         }
-    
 
-        this.machine.state = new LocationState(this.machine);
+
+        let newState = new LocationState(this.machine);
+        this.machine.state = newState;
+
         return "Ok, I have added that destination to your list.<br>Please Select your next destination.";
-
     }
 
-
+    prompt(){
+        return this.execute();
+    }
 }
+
 
 
 class ConfirmDestinationState{
@@ -226,16 +273,15 @@ class ConfirmDestinationState{
         }
 
         this.machine.state = newState;
-        return newState.statePrompt();
+        return newState.prompt();
     }
 
-    statePrompt(){
+    prompt(){
         let response = "Ok thats all of them, are you satisfied with all the destinations that you choosed?<ul>";
 
         this.destinations.forEach(destination => {
             let datesString = destination.getDates().toString();
             response = response + `<li> ${destination.name} - (${datesString})</li>`;
-            console.log(response);
         });
         response = response + "</ul>";
 
@@ -282,13 +328,13 @@ class RecomendationState{
             message = message + "warm weather clothes, ";
         }
         if (clothesRecomendations.summerClothes) {
-           message = message + "summer clothes, "
+           message = message + "summer clothes, ";
         }
     
         return message + "make sure u bring all the clothes you need. Have a nice trip.";
     }
 
-    statePrompt(){
+    prompt(){
         return this.execute();
     }
 }
