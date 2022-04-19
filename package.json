@@ -1,12 +1,16 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
+  "type": "module",
   "devDependencies": {
     "jest": "^27.5.1",
     "qunit": "^2.18.1"
   },
   "name": "monkeyweather",
+  "jest":{
+    "setupFiles": ["./__mock__/document.js"]
+  },
   "description": "For this project, we created a chat-bot that will help the user to select clothing for a 3 day trip according to the weather conditions in the chosen locations.",
   "version": "1.0.0",
   "main": "index.js",

@@ -1,4 +1,4 @@
-module.exports = class Chatbox{
+export default class Chatbox{
     chatbox;
     inputField;
 
@@ -26,6 +26,7 @@ module.exports = class Chatbox{
         newMessage.innerHTML = text;
         newMessage.classList.add(className);
         this.chatbox.appendChild(newMessage);
+        console.log(this.chatbox);
     }
 
     scrollChatbox(){
