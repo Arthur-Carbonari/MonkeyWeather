@@ -15,7 +15,10 @@ export default class Destination{
         this.lon = location.lon;
     }
 
-
+    /**
+     * This methods returns an array all the date string for each of the Forecast objects stored in the forecast array of this Destination object.
+     * @returns {string[]} Array of string representation of dates in the format DD/MM.
+     */
     getDates(){
         let dates = [];
 
@@ -27,6 +30,10 @@ export default class Destination{
     }
 
 
+    /**
+     * This method updates the forecast atribute of this object so that only the indexes supplied in the options array are kept.
+     * @param {int} options - Array containing the desired indexes that we want to keep of the forecast array.
+     */
     selectDates(options){
         options.sort();
 
@@ -40,7 +47,10 @@ export default class Destination{
         this.forecast = forecast;
     }
 
-
+    /**
+     * This method returns an array that contains all the values of temperature for each of the Forecast objects inside of the forecast array of this Destination object.
+     * @returns {double} Array containing all the feel like temperature for this Destination forecasts.
+     */
     getAllForecastTemperatures(){
         let temperatures = [];
 
@@ -51,7 +61,10 @@ export default class Destination{
         return temperatures;
     }
 
-
+    /**
+      * This method stores all the weatherMain strings of the Forecasts stored in this Destination object inside of an array and then returns that array.
+     * @returns {string} Array containing all the weatherMain for this Destination forecasts.
+     */
     getAllForecastWeather(){
         let weather = [];
 
