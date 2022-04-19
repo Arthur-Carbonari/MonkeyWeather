@@ -1,16 +1,11 @@
-//Mock document
-var jsdom = require('jsdom');
-const { JSDOM } = jsdom;
-const dom = new JSDOM('<DOCTYPE html><body></body>');
 //Call Chatbox
-const Chatbox = require('./Chatbox')
-
+import Chatbox from './Chatbox';
 
 describe('Chatbox',() => {
     //Mock HTML elements
-    let box = dom.window.document.createElement("div");
+    let box = document.createElement("div");
     box.setAttribute('id',"chatBox");
-    let inputField = dom.window.document.createElement("input");
+    let inputField = document.createElement("input");
     inputField.setAttribute('id',"userInput");
     //Mock Chatbox object
     let mockObj = new Chatbox(box,inputField);
@@ -46,5 +41,18 @@ describe('Chatbox',() => {
         //Test to see if method cleared the value of inputField
         expect(mockObj.inputField.value).toEqual("");
     })
+
+    //TODO: Bu ne amk
+    // test("updateChatBox test",() => {
+    //     expect(document.getElementsByClassName("class").length).toBe(0);
+
+    //     //creating parameters
+    //     let str = "This message will be appended.";
+    //     let className = "class";
+    //     //Run Method
+    //     mockObj.updateChatbox(str,className);
+    //     //Controls if there is a div with predefined class name
+    //     expect(document.getElementsByClassName("class").length).toBe(1);
+    // })
 
 })
