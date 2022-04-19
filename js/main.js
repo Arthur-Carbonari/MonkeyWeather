@@ -3,8 +3,10 @@ import Chatbot from './Chatbot.js';
 
 const messagesView = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
+console.log(messagesView);
 
 const chatbox = new Chatbox(messagesView, userInputField);
+console.log(chatbox);
 
 
 const chatbot = new Chatbot();

@@ -78,7 +78,7 @@ class LocationState{
     }
 
     prompt(){
-        return "Ok, please tell me your first location.";
+        return "Ok, please tell me a location you want to visit.";
     }
 
 }
@@ -95,10 +95,10 @@ class ConfirmingLocationState{
         this.location = location;
     }
 
-    async execute(input){
+    execute(input){
 
         if(input === "yes"){
-            let destination = new Destination(this.location[this.locationIndex]);
+            let destination = new Destination(this.location[0]);
 
             let newState = new ForecastState(this.machine, destination);
             this.machine.state = newState;
@@ -106,9 +106,13 @@ class ConfirmingLocationState{
             return newState.prompt();
         }
         else {
-            this.locationIndex++;
-            let locationName = this.location[this.locationIndex].name;
-            return "Hmm, so do you  want to go to " + locationName + "?";
+            
+            this.location.shift();
+            let newState = new AlternativeLocationState(this.machine, this.location);
+            this.machine.state = newState;
+
+            return newState.prompt();
+
         }
 
     }
@@ -117,6 +121,86 @@ class ConfirmingLocationState{
         return "Oh so do you wanna go to " + this.location[0].name + "?";
     }
 
+
+}
+
+
+class AlternativeLocationState{
+    machine;
+    location;
+    options;
+
+    constructor(machine, location){
+        this.machine = machine;
+        this.location = location;
+    }
+
+    execute(input){
+        if(this.options.length == 0) return this.goBack();
+
+        
+
+        input = Parser.getAllNumbersFromString(input);
+
+        console.log(input);
+        if(input === null) return "Please select a valid option";
+
+        input =  parseInt(input[0]);
+
+        let anyLocationsLeft = this.location.length > 0;
+        if(input > this.options.length){
+            input = input % this.options.length;
+
+            if(input == 1 && anyLocationsLeft) return this.prompt();
+
+            return this.goBack();
+        }
+
+        if(input <= this.options.length){
+
+            let destination = new Destination(this.options[input-1]);
+
+            let newState = new ForecastState(this.machine, destination);
+            this.machine.state = newState;
+
+            return newState.prompt();
+
+        }
+
+
+        return "Please select a valid option.";
+    }
+
+    prompt(){
+        let options = [];
+
+        let counter = 0;
+
+        while(counter < 3 && this.location.length > 0){
+            options.push(this.location.shift());
+            counter++;
+        }
+
+
+        let message = "In that case, please select one of the options bellow: <ol>";
+
+        options.forEach(option => {
+            message += `<li> ${option.name}</li>`;
+        });
+
+        if(this.location.length > 0) message += "<li> More options</li>";
+        message += "<li> Return to location selection</li>";
+
+        this.options = options;
+
+        return message;
+    }
+
+    goBack(){
+        let newState = new LocationState(this.machine);
+        this.machine.state = newState;
+        return newState.prompt();
+    }
 
 }
 
