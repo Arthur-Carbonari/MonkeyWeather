@@ -76,7 +76,7 @@ export default class Destination{
     }
 
 
-    getClothesRecomendation(){
+    updateClothesRecomendation(){
         let temperatures = this.getAllForecastTemperatures();
         let weather = this.getAllForecastWeather();
 

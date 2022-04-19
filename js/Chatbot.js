@@ -315,7 +315,7 @@ class DestinationState{
 
     execute(){
 
-        this.destination.calculateClothesRecomendation();
+        this.destination.updateClothesRecomendation();
         this.machine.selectedDestination.push(this.destination);
 
         if(this.machine.selectedDestination.length > 1){  // CHANGE THIS TO 4 AFTER TESTING
@@ -376,14 +376,22 @@ class ConfirmDestinationState{
 
 class RecomendationState{
     machine;
+    destinations;
 
     constructor(machine){
         this.machine = machine;
+        destinations = machine.selectedDestination;
     }
 
     execute(input){
 
-        return "got all the way here :)";
+        let recomendations = new ClothesRecomendations();
+
+        this.destinations.forEach(destination => {
+            recomendations.combineRecomendations(destination.clothesRecomendations);
+        });
+
+        return recomendations.getMessage();
         //return this.clothesMessage(this.machine.clothesRecomendations);
 
     }   
