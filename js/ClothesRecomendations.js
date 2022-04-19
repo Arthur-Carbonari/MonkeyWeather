@@ -1,18 +1,19 @@
 export default  class ClothesRecomendations{
-    rainClothes = 0;
-    winterClothes = 0;
-    coldClothes = 0;
-    chillyClothes = 0;
-    mildClothes = 0;
-    warmClothes = 0;
+    heavyCoat = 0;
+    coat = 0;
+    warmJacket = 0;
+    sweatshirt = 0;
+    lightClothes = 0;
     summerClothes = 0;
+    
+    rainCoat = 0;
 
     updateByTemp(temp){
-
+        if(this.temperatureBetween(temp, -10, 0)) this.heavyCoat++;
     }
 
     updateByWeather(weather){
-        
+        if(weather === "Rain") this.rainCoat++;
     }
 
     updateRecomendations(processedWeatherData) {
@@ -65,7 +66,7 @@ export default  class ClothesRecomendations{
     
     
     
-    checkTemperatureBetween(processedWeatherData, minimum, maximum) {
+    temperatureBetween(processedWeatherData, minimum, maximum) {
     
         let clothesAreNeeded = false;
     

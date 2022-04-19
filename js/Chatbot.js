@@ -70,7 +70,6 @@ class LocationState{
 
         let locationData = await LocationFetcher.getLocation(input);
         let location = Location.getLocationsFromData(locationData);
-        console.log(location);
 
         let newState = new ConfirmingLocationState(this.machine, location);
         this.machine.state = newState;
