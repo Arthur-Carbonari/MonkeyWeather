@@ -1,4 +1,4 @@
-export default class Chatbox{
+module.exports = class Chatbox{
     chatbox;
     inputField;
 

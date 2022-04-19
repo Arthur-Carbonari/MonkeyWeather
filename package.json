@@ -1,8 +1,33 @@
 {
   "scripts": {
-    "test": "qunit"
+    "test": "jest"
   },
   "devDependencies": {
+    "jest": "^27.5.1",
     "qunit": "^2.18.1"
-  }
+  },
+  "name": "monkeyweather",
+  "description": "For this project, we created a chat-bot that will help the user to select clothing for a 3 day trip according to the weather conditions in the chosen locations.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@types/jest": "^27.4.1",
+    "commander": "^7.2.0",
+    "globalyzer": "^0.1.0",
+    "globrex": "^0.1.2",
+    "jest-environment-jsdom": "^27.5.1",
+    "jsdom": "^19.0.0",
+    "node-watch": "^0.7.3",
+    "tiny-glob": "^0.2.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.griffith.ie/ArthurMartins/monkeyweather.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
