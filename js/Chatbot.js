@@ -314,7 +314,7 @@ class DestinationState{
 
 
     execute(){
-
+        console.log(this.destination);
         this.destination.updateClothesRecomendation();
         this.machine.selectedDestination.push(this.destination);
 
@@ -380,50 +380,27 @@ class RecomendationState{
 
     constructor(machine){
         this.machine = machine;
-        destinations = machine.selectedDestination;
+        this.destinations = machine.selectedDestination;
     }
 
     execute(input){
-
+        console.log("test from here");
         let recomendations = new ClothesRecomendations();
 
-        this.destinations.forEach(destination => {
-            recomendations.combineRecomendations(destination.clothesRecomendations);
-        });
+        console.log(this.destinations);
+
+        for (let i = 0; i < this.destinations.length; i++) {
+            recomendations.combineRecomendations(this.destinations[i].clothesRecomendation);
+            console.log(recomendations);
+        }
+
+        console.log(recomendations);
 
         return recomendations.getMessage();
         //return this.clothesMessage(this.machine.clothesRecomendations);
 
     }   
 
-    clothesMessage(clothesRecomendations) {
-
-        let message = "You will need ";
-        if (clothesRecomendations.rainClothes) {
-            message = message + "rainy weather clothes, ";
-        }
-        if (clothesRecomendations.winterClothes) {
-            message = message + "winter clothes, ";
-        }
-        if (clothesRecomendations.coldClothes) {
-            message = message + "cold weather clothes, ";
-    
-        }
-        if (clothesRecomendations.chillyClothes) {
-            message = message + "chilly weather clothes, ";    
-        }
-        if (clothesRecomendations.mildClothes) {
-            message = message + "mild weather clothes, ";
-        }
-        if (clothesRecomendations.warmClothes) {
-            message = message + "warm weather clothes, ";
-        }
-        if (clothesRecomendations.summerClothes) {
-           message = message + "summer clothes, ";
-        }
-    
-        return message + "make sure u bring all the clothes you need. Have a nice trip.";
-    }
 
     prompt(){
         return this.execute();

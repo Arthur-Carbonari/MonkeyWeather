@@ -7,7 +7,7 @@ export default class Destination{
     forecast;
     lat;
     lon;
-    clothesRecomendation;
+    clothesRecomendation = new ClothesRecomendations;
 
     constructor(location){
         this.name = location.name;
