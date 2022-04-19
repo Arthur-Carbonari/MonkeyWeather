@@ -2,27 +2,42 @@ body{
     font-family:" Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
     padding:0;
     margin:0;
-  }
-
-#main{
-  margin: 0 auto;
-  width:90%;
-  padding: 1rem;
-  line-height: 1.5rem;
-}
-
-#chatBox{
-    width:60%;
-    margin: auto;
-    height: 30rem;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
     background-image: url("backgroundPattern.jpg");
     background-repeat: repeat;
     background-size: contain;
-    overflow-y: scroll;
+}
 
+#chatBox{
+  margin: 0 ;
+  width:100%;
+  height: 100vh;
+  padding: 0;
+  line-height: 1.5rem;
+  background-color: rgba(123, 125, 125, 0.5);
+  display: flex;
+  flex-direction: row;
+}
+
+#messagesView{
+    width:70%;
+    margin:0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+ 
+#sidebar{
+    width:30%; 
+}
+
+#aside{
+    width: 30%;
+    color: #fff;
+    background-color: #444;
+    padding: 1rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .userMessage{
@@ -57,10 +72,8 @@ body{
     width: 60%;
     margin-top: 0;
     position: relative;
-    border: 1px solid black;
     border-top: 0;
     height: 4rem;
-    background-color: #fdf7ad;
 }
 
 #sendButton{

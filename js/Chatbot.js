@@ -40,7 +40,7 @@ class GreetingState{
 }
 
 
-class MainState{
+class StartingState{
     machine;
 
     constructor(machine){
