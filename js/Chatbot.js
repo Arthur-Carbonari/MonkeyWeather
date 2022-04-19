@@ -161,7 +161,7 @@ class ConfirmingState{
 }
 
 
-class RecomendationState{
+class RecomendClothesState{
     machine;
 
     constructor(machine){
