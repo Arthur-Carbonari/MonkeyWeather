@@ -4,11 +4,13 @@ body{
     margin:0;
   }
 
-#main{
-  margin: 0 auto;
-  width:90%;
-  padding: 1rem;
-  line-height: 1.5rem;
+  main{
+    background-image: url("backgroundPattern.jpg") ;
+    background-repeat: repeat;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 #chatBox{
