@@ -8,19 +8,17 @@
     <title>monkeyweather</title>
 </head>
 <body>
-    <main>
+    <div id = "main"> 
         <div id="chatBox">
+            <div class="userMessage "><p id="userText">Hi im the user</p> </div>
             <div class="botMessage"><p id = "botText">Hi im the bot</p></div>
         </div>
-        <aside>            
-            <h2>MonkeyWeather</h2>
-            <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum quidem, iusto autem nobis omnis mollitia. Reprehenderit, aperiam nesciunt mollitia deserunt, fugit sunt ipsum doloremque quos, eligendi beatae officiis totam obcaecati.</p>          
-        </aside>
-    </main>
-    <div id ="sendText"> 
-        <input id="userInput" type="text" placeholder="Hey you! Type here to chat with me... " autofocus="true">
-        <button id="sendButton" type="submit"> Send </button>
+        <div id ="sendText"> 
+            <input id="userInput" type="text" placeholder="Ask... " autofocus="true">
+            <button id="sendButton" type="submit"> Send </button>
+        </div>
     </div>
-    <script type="module" src="js/main.js"></script>
+    <script src="functions.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
