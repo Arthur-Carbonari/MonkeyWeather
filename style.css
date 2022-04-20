@@ -30,6 +30,24 @@ body{
 
 }
 
+aside{
+    justify-self: flex-start;
+    width: 30%;
+    background-color: rgb(250, 244, 193);
+}
+
+aside header{
+    padding: 0.25rem;
+    background-color: #292929;
+    border-bottom: 1px solid #dedcc7;
+    color: #fff;
+
+}
+
+aside p{
+    padding: 1rem;
+}
+
 .userMessage{
     align-self: flex-end;
     padding: 0.5rem;
