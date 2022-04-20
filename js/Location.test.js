@@ -1,3 +1,4 @@
+//Call Location
 import Location from "./Location";
 
 describe("Location",() => {
@@ -17,11 +18,19 @@ describe("Location",() => {
 
     test("getLocationFromData test",() => {
         //Create mock data
-        let mockData = ['a:13:{s:5:"coord";a:2:{s:3:"lon";d:28.979530;s:3:"lat";d:41.015137;}s:7:"weather";a:1:{i:0;a:4:{s:2:"id";i:800;s:4:"main";s:5:"Clear";s:11:"description";s:9:"clear sky";s:4:"icon";s:3:"01d";}}s:4:"base";s:8:"stations";s:4:"main";a:6:{s:4:"temp";d:282.55;s:10:"feels_like";d:281.86;s:8:"temp_min";d:280.37;s:8:"temp_max";d:284.26;s:8:"pressure";i:1023;s:8:"humidity";i:100;}s:10:"visibility";i:10000;s:4:"wind";a:2:{s:5:"speed";d:1.5;s:3:"deg";i:350;}s:6:"clouds";a:1:{s:3:"all";i:1;}s:2:"dt";i:1560350645;s:3:"sys";a:6:{s:4:"type";i:1;s:2:"id";i:5122;s:7:"message";d:0.0139;s:7:"country";s:2:"US";s:7:"sunrise";i:1560343627;s:6:"sunset";i:1560396563;}s:8:"timezone";i:-25200;s:2:"id";i:420006353;s:4:"name";s:13:"Istanbul";s:3:"cod";i:200;}','a:13:{s:5:"coord";a:2:{s:3:"lon";d:-122.08;s:3:"lat";d:37.39;}s:7:"weather";a:1:{i:0;a:4:{s:2:"id";i:800;s:4:"main";s:5:"Clear";s:11:"description";s:9:"clear sky";s:4:"icon";s:3:"01d";}}s:4:"base";s:8:"stations";s:4:"main";a:6:{s:4:"temp";d:282.55;s:10:"feels_like";d:281.86;s:8:"temp_min";d:280.37;s:8:"temp_max";d:284.26;s:8:"pressure";i:1023;s:8:"humidity";i:100;}s:10:"visibility";i:10000;s:4:"wind";a:2:{s:5:"speed";d:1.5;s:3:"deg";i:350;}s:6:"clouds";a:1:{s:3:"all";i:1;}s:2:"dt";i:1560350645;s:3:"sys";a:6:{s:4:"type";i:1;s:2:"id";i:5122;s:7:"message";d:0.0139;s:7:"country";s:2:"US";s:7:"sunrise";i:1560343627;s:6:"sunset";i:1560396563;}s:8:"timezone";i:-25200;s:2:"id";i:420006353;s:4:"name";s:13:"Mountain View";s:3:"cod";i:200;}']
+        let mockData = [{"place_id":18171373,"licence":"Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright","osm_type":"node","osm_id":1882099475,"boundingbox":["40.8496334","41.1696334","28.8051646","29.1251646"],"lat":"41.0096334","lon":"28.9651646","display_name":"Istanbul, Fatih, Istanbul, Marmara Region, 34126, Turkey","class":"place","type":"city","importance":0.8247656681002855},
+        {"place_id":286942693,"licence":"Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright","osm_type":"relation","osm_id":1109531,"boundingbox":["53.2987342","53.4105416","-6.3870259","-6.1148829"],"lat":"53.3497645","lon":"-6.2602732","display_name":"Dublin, County Dublin, Leinster, Ireland","class":"boundary","type":"administrative","importance":0.8115896071732729}]
 
         let parsedData = Location.getLocationsFromData(mockData);
-        //Controls
-        console.log(parsedData);
+        //Control names
+        expect(parsedData[0].name).toBe('Istanbul, Fatih, Istanbul, Marmara Region, 34126, Turkey');
+        expect(parsedData[1].name).toBe('Dublin, County Dublin, Leinster, Ireland');
+        //Control lat
+        expect(parsedData[0].lat).toBe('41.0096334');
+        expect(parsedData[1].lat).toBe('53.3497645');
+        //Control lon
+        expect(parsedData[0].lon).toBe('28.9651646');
+        expect(parsedData[1].lon).toBe('-6.2602732');
 
     })
 })
