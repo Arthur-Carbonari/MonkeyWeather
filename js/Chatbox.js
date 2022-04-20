@@ -54,6 +54,7 @@ export default class Chatbox{
         newMessage.innerHTML = text;
         newMessage.classList.add(className);
         this.chatbox.appendChild(newMessage);
+        console.log(this.chatbox);
     }
 
     /**
