@@ -50,6 +50,7 @@ aside{
     justify-self: flex-start;
     width: 30%;
     background-color: rgb(250, 244, 193);
+    height: 100vh;
 }
 
 aside header{
@@ -92,9 +93,9 @@ aside p{
 }
 
 #sendText{
-    position: absolute;
+    position: relative;
     bottom: 0;
-    width: 63rem;
+    width: 100%;
     border-top: 0;
     height: 4rem;
     background-color: #292929;
