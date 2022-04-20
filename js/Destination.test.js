@@ -52,6 +52,16 @@ describe("Destination", () => {
             let tempArr = ["Clear","Clouds","Clouds"];
             expect(mockDest.getAllForecastWeather()).toStrictEqual(tempArr)
         })
+
+        test("updateClothesRecomendation test",() => {
+            let clothArr = mockDest.updateClothesRecomendation();
+            expect(clothArr.heavyCoat).toBe(0);
+            expect(clothArr.warmJacket).toBe(2);
+            expect(clothArr.sweatshirt).toBe(10);
+            expect(clothArr.lightClothes).toBe(0);
+            expect(clothArr.summerClothes).toBe(0);
+            expect(clothArr.rainCoat).toBe(0);
+        })
         
     })
 })
