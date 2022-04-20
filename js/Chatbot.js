@@ -318,7 +318,7 @@ class DestinationState{
         this.destination.updateClothesRecomendation();
         this.machine.selectedDestination.push(this.destination);
 
-        if(this.machine.selectedDestination.length > 1){  // CHANGE THIS TO 4 AFTER TESTING
+        if(this.machine.selectedDestination.length > 4){  // CHANGE THIS TO 4 AFTER TESTING
             let newState =  new ConfirmDestinationState(this.machine);
             this.machine.state = newState;
             return newState.prompt();
