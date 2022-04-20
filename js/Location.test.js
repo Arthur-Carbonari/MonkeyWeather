@@ -1,4 +1,4 @@
-//Call Location
+//Call
 import Location from "./Location";
 
 describe("Location",() => {
