@@ -4,25 +4,65 @@ body{
     margin:0;
   }
 
-#main{
-  margin: 0 auto;
-  width:90%;
-  padding: 1rem;
-  line-height: 1.5rem;
+  main{
+    background-image: url("backgroundPattern.jpg") ;
+    background-repeat: repeat;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+ /* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(82, 78, 78);
+    border-radius: 10px;
+  }
+
 #chatBox{
-    width:60%;
-    margin: auto;
-    height: 30rem;
-    border: 1px solid black;
+    width:70%;
+    height: 92vh;
     display: flex;
     flex-direction: column;
-    background-image: url("backgroundPattern.jpg");
-    background-repeat: repeat;
-    background-size: contain;
+    background-color: rgba(255, 255, 255, 0.3);
     overflow-y: scroll;
+}
 
+#chatBox header{
+    background-color: #292929;
+    padding: 0.25rem;
+    letter-spacing: 0.5px;
+    color:#fff;
+
+}
+
+aside{
+    justify-self: flex-start;
+    width: 30%;
+    background-color: rgb(250, 244, 193);
+    height: 100vh;
+}
+
+aside header{
+    padding: 0.25rem;
+    background-color: #292929;
+    border-bottom: 1px solid #dedcc7;
+    color: #fff;
+
+}
+
+aside p{
+    padding: 1rem;
 }
 
 .userMessage{
@@ -53,39 +93,32 @@ body{
 }
 
 #sendText{
-    margin: auto;
-    width: 60%;
-    margin-top: 0;
-    position: relative;
-    border: 1px solid black;
+    position: absolute;
+    bottom: 0;
+    width: 70%;
     border-top: 0;
     height: 4rem;
-    background-color: #fdf7ad;
+    background-color: #292929;
+
 }
 
 #sendButton{
-    position: absolute;
-    right: 11px;
-    top: 9px;
-    z-index: 1;
     padding: 0.8rem;
     border-radius: 20px;
     border: 0;
-    background-color: rgba(153, 153, 102,0.7);
+    background-color: rgb(30, 102, 52);
     color: #ffffff;
 }
 
 #userInput{
-    position: absolute;
-    right:0;
-    left: 0;
-    padding: 0.5rem;
-    margin: 0.5rem;
-    height: 1.7rem;
-    border-radius: 20px;
-    border: 1.2px solid #999966;
-    background-color: rgba(242, 242,242,0.75);
-}
+    width: 90%;
+     padding: 0.5rem;
+     margin: 0.5rem;
+     height: 1.7rem;
+     border-radius: 20px;
+     border: 1.2px solid #999966;
+     background-color: rgb(242, 242,242);
+ }
 
 #userInput:focus{ /*removes the outline border when typing inside userInput*/
     outline: none;
