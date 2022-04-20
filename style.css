@@ -31,7 +31,7 @@ body{
 
 #chatBox{
     width:70%;
-    height: 100vh;
+    height: 92vh;
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.3);
@@ -93,14 +93,15 @@ aside p{
 }
 
 #sendText{
-    position: relative;
+    position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 70%;
     border-top: 0;
     height: 4rem;
     background-color: #292929;
 
 }
+
 #sendButton{
     padding: 0.8rem;
     border-radius: 20px;
