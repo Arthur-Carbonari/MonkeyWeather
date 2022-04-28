@@ -420,8 +420,6 @@ class DeletingState{
 
         let returnOption = this.machine.selectedDestination.length+1;
 
-        console.log(selectedOption);
-        console.log(this.selection);
         if(selectedOption == returnOption){
             let newState = new TransitionState(this.machine);
             this.machine.state = newState;
@@ -431,12 +429,12 @@ class DeletingState{
         if(this.selection.includes(selectedOption)){
 
             let index = selectedOption - 1;
-            console.log(index);
             
             this.machine.selectedDestination.splice(index, 1);
             console.log(this.machine.selectedDestination);
 
             this.machine.asideElements.splice(index, 1);
+            this.machine.updateAside = true;
 
             return this.prompt();
         }
@@ -448,7 +446,7 @@ class DeletingState{
     prompt(){
 
         this.selection = [];
-        console.log(this.machine.selectedDestination.length);
+
         for (let i = 1; i <= this.machine.selectedDestination.length; i++) {
             this.selection.push(`${i}`);
         }
