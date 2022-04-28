@@ -42,9 +42,9 @@ async function  handleInput(userInput) {
 
     if(chatbot.updateSideDisplay){
         let details = chatbot.getSideDisplay();
+
+        sideDisplay.innerHTML = "";
         sideDisplay.appendChild(details);
-        console.log(details.childNodes[0]);
-        console.log(details);
     }
 
     chatbox.updateChatbox(botResponse, "botMessage");
