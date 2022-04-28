@@ -16,7 +16,7 @@ export default class Destination{
     }
 
     /**
-     * This methods returns an array all the date string for each of the Forecast objects stored in the forecast array of this Destination object.
+     * This methods returns an array with all the Date Strings for each one of the Forecasts in the forecast array.
      * @returns {string[]} Array of string representation of dates in the format DD/MM.
      */
     getDates(){
@@ -93,7 +93,7 @@ export default class Destination{
 
     toString(){
         let datesString = this.getDates().toString();
-        let string = `<li> ${this.name} - (${this.getDates()} )</li>`;
+        let string = `<li> ${this.name} - [ ${this.getDates()} ]</li>`;
 
         return string;
     }
