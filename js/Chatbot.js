@@ -13,7 +13,7 @@ export default class Chatbot{
     state;
     selectedDestination = [];
 
-    updateSideDisplay = false;
+    updateAside  = false;
     asideElements = [];
 
     constructor(){
@@ -25,16 +25,8 @@ export default class Chatbot{
         return this.state.execute(input);
     }
 
-    getSideDisplay(){
-        sideDisplay = document.createElement("div");
-
-        this.asideElements.forEach(element => {
-            sideDisplay.append(element);           
-        });
-
-        sideDisplay.id= "sideContent";
-
-        return sideDisplay;
+    getAsideElements(){
+        return this.asideElements;
     }
 }
 
@@ -331,10 +323,10 @@ class DestinationState{
     execute(){
         console.log(this.destination);
         this.destination.updateClothesRecomendation();
-        
+
         this.machine.selectedDestination.push(this.destination);
         this.machine.asideElements.push(this.destination.asHtmlElement());
-        this.machine.updateSideDisplay = true;
+        this.machine.updateAside     = true;
 
         let newState = new TransitionState(this.machine);
         this.machine.state = newState;
