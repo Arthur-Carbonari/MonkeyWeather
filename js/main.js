@@ -5,7 +5,7 @@ const messagesView = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
 const sideContent = document.getElementById("sideContent");
 
-const chatbox = new Chatbox(messagesView, userInputField);
+const chatbox = new Chatbox(messagesView, userInputField, sideContent);
 
 
 const chatbot = new Chatbot();
@@ -41,12 +41,8 @@ async function  handleInput(userInput) {
     requestNumber++;
 
     if(chatbot.updateAside){
-        let destinations = chatbot.getAsideElements();
-
-        sideContent.innerHTML = "";
-        destinations.forEach(destination => {
-            sideContent.append(destination);
-        });
+        let asideElements = chatbot.getAsideElements();
+        chatbox.updateSideContent(asideElements);
     }
 
     chatbox.updateChatbox(botResponse, "botMessage");
