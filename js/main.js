@@ -3,7 +3,7 @@ import Chatbot from './Chatbot.js';
 
 const messagesView = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
-const sideDisplay = document.getElementById("sideDisplay");
+const sideContent = document.getElementById("sideContent");
 
 const chatbox = new Chatbox(messagesView, userInputField);
 
@@ -40,11 +40,13 @@ async function  handleInput(userInput) {
     let botResponse = await chatbot.getBotResponse(userInput);
     requestNumber++;
 
-    if(chatbot.updateSideDisplay){
-        let details = chatbot.getSideDisplay();
+    if(chatbot.updateAside){
+        let destinations = chatbot.getAsideElements();
 
-        sideDisplay.innerHTML = "";
-        sideDisplay.appendChild(details);
+        sideContent.innerHTML = "";
+        destinations.forEach(destination => {
+            sideContent.append(destination);
+        });
     }
 
     chatbox.updateChatbox(botResponse, "botMessage");
