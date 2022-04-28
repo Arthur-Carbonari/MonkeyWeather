@@ -69,5 +69,10 @@ export default class Chatbox{
         this.chatbox.scrollTop = this.chatbox.scrollHeight;
     }
 
-    
+    updateSideContent(elements){
+        this.sideContent.innerHTML = "";
+        elements.forEach(element => {
+            this.sideContent.append(element);
+        });
+    }
 }
