@@ -379,14 +379,30 @@ class ConfirmDestinationState{
         let response = "Ok thats all of them, are you satisfied with all the destinations that you choosed?<ul>";
 
         this.destinations.forEach(destination => {
-            let datesString = destination.getDates().toString();
-            response = response + `<li> ${destination.name} - (${datesString})</li>`;
+            response += destination;
         });
         response = response + "</ul>";
 
         return response;
     }
 
+}
+
+
+class DeletingState{
+    machine;
+
+    constructor(machine){
+        this.machine = machine;
+    }
+
+    execute(input){
+        //deletes selected index numbers.
+    }
+
+    prompt(){
+
+    }
 }
 
 
