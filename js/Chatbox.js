@@ -11,12 +11,18 @@ export default class Chatbox{
     inputField;
 
     /**
+     * 
+     */
+    sideContent;
+
+    /**
      * @param {DOMElement} chatbox - HTML element where the messages are going to be displayed in.
      * @param {DOMElement} inputField - HTML element where the user will write his input in.
      */
-    constructor(chatbox, inputField){
+    constructor(chatbox, inputField, sideContent){
         this.chatbox = chatbox;
         this.inputField = inputField;
+        this.sideContent = sideContent;
     }
 
     /**
@@ -62,4 +68,6 @@ export default class Chatbox{
     scrollChatbox(){
         this.chatbox.scrollTop = this.chatbox.scrollHeight;
     }
+
+    
 }
