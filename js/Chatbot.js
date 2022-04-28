@@ -447,6 +447,23 @@ class DeletingState{
 
     prompt(){
 
+        this.selection = [];
+        console.log(this.machine.selectedDestination.length);
+        for (let i = 1; i <= this.machine.selectedDestination.length; i++) {
+            this.selection.push(`${i}`);
+        }
+
+        let prompt = "Please select which one of the destinations you would like to remove from your itinerary:<ol>";
+
+        this.machine.selectedDestination.forEach(destination => {
+            prompt += destination;
+        });
+
+        prompt += "<li>Return</li>";
+
+        prompt += "</ol>";
+
+        return prompt;
     }
 }
 
