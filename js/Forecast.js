@@ -1,3 +1,4 @@
+import ClothesRecomendations from "./ClothesRecomendations.js";
 import Parser from "./Parser.js";
 
 /**
@@ -84,5 +85,42 @@ export default class Forecast{
 
 
         return parsedForecast;
+    }
+
+    asHtmlElement(){
+        let element = document.createElement("div");
+        element.classList.add("forecast");
+
+        let feels_like = this.feels_like;
+
+        let innerHtml =
+        `
+        <h3>${this.date}:</h3>
+        <p>${this.weatherDescription}</p>
+        <h4>Feels Like Temperature:</h4>
+        <ul>
+            <li>Morning: ${feels_like.morn}</li>
+            <li>Day: ${feels_like.day}</li>
+            <li>Evening: ${feels_like.eve}</li>
+            <li>Night: ${feels_like.night}</li>
+        </ul>
+        `;
+
+        element.innerHTML = innerHtml;
+
+        let clothesRecomendation = new ClothesRecomendations();
+
+        clothesRecomendation.updateByTemp(feels_like.morn);
+        clothesRecomendation.updateByTemp(feels_like.day);
+        clothesRecomendation.updateByTemp(feels_like.eve);
+        clothesRecomendation.updateByTemp(feels_like.night);
+
+        element.append(clothesRecomendation.asHtmlElement());
+
+        
+
+        console.log(element);
+
+        return element;
     }
 }
