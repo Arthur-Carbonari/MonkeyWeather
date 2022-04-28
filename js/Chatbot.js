@@ -11,7 +11,8 @@ export default class Chatbot{
 
     
     state;
-    selectedDestination = [];   
+    selectedDestination = [];
+    updateSideDisplay = false;
 
     constructor(){
         this.state = new GreetingState(this); 
@@ -20,6 +21,18 @@ export default class Chatbot{
 
     async getBotResponse(input){
         return this.state.execute(input);
+    }
+
+    getSideDisplay(){
+        sideDisplay = document.createElement("div");
+
+        this.selectedDestination.forEach(destination => {
+            sideDisplay.append(destination.asHtmlElement());           
+        });
+
+        sideDisplay.id= "sideContent";
+
+        return sideDisplay;
     }
 }
 
@@ -318,7 +331,7 @@ class DestinationState{
         this.destination.updateClothesRecomendation();
         this.machine.selectedDestination.push(this.destination);
 
-        if(this.machine.selectedDestination.length > 4){  // CHANGE THIS TO 4 AFTER TESTING
+        if(this.machine.selectedDestination.length > 0){  // CHANGE THIS TO 4 AFTER TESTING
             let newState =  new ConfirmDestinationState(this.machine);
             this.machine.state = newState;
             return newState.prompt();
@@ -396,9 +409,11 @@ class RecomendationState{
 
         console.log(recomendations);
 
-        return recomendations.getMessage();
-        //return this.clothesMessage(this.machine.clothesRecomendations);
+        console.log(this.machine.selectedDestination);
 
+        this.machine.updateSideDisplay = true;
+
+        return recomendations.getMessage();
     }   
 
 
