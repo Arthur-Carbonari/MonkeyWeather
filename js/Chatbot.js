@@ -390,6 +390,10 @@ class ConfirmDestinationState{
             newState = new RecomendationState(this.machine);
         }
 
+        if(input == "no"){
+            newState = new DeletingState(this.machine);
+        }
+
         this.machine.state = newState;
         return newState.prompt();
     }
@@ -410,6 +414,7 @@ class ConfirmDestinationState{
 
 class DeletingState{
     machine;
+    selection;
 
     constructor(machine){
         this.machine = machine;
