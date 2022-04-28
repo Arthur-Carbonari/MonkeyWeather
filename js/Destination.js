@@ -91,6 +91,13 @@ export default class Destination{
         return this.clothesRecomendation;
     }
 
+    toString(){
+        let datesString = this.getDates().toString();
+        let string = `<li> ${this.name} - (${this.getDates()} )</li>`;
+
+        return string;
+    }
+
     asHtmlElement(){
         let element = document.createElement("div");
         element.classList.add("destination");
