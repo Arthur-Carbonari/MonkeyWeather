@@ -93,4 +93,27 @@ export default  class ClothesRecomendations{
         this.warmJacket = this.warmJacket + clothesRecomendation.warmJacket;
 
     }
+
+
+    asHtmlElement(){
+        let element = document.createElement("div");
+        element.classList.add("clothesRecomendation");
+
+        let innerHtml = "<h4>You should consider bringing:</h4><ul>";
+
+        if(this.heavyCoat > 0) innerHtml += "<li>Heavy Coat</li>";
+        if(this.warmJacket > 0) innerHtml += "<li>Warm Jacket</li>";
+        if(this.sweatshirt > 0) innerHtml += "<li>Sweatshirt</li>";
+        if(this.lightClothes > 0) innerHtml += "<li>Light Clothes</li>";
+        if(this.summerClothes > 0) innerHtml += "<li>Summer Clothes</li>";
+        if(this.rainCoat > 0) innerHtml += "<li>Rain Coat</li>";
+
+        innerHtml += "</ul>";
+
+        element.innerHTML = innerHtml;
+
+        
+
+        return element;
+    }
 }
