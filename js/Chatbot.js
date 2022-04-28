@@ -12,7 +12,9 @@ export default class Chatbot{
     
     state;
     selectedDestination = [];
+
     updateSideDisplay = false;
+    asideElements = [];
 
     constructor(){
         this.state = new GreetingState(this); 
@@ -26,8 +28,8 @@ export default class Chatbot{
     getSideDisplay(){
         sideDisplay = document.createElement("div");
 
-        this.selectedDestination.forEach(destination => {
-            sideDisplay.append(destination.asHtmlElement());           
+        this.asideElements.forEach(element => {
+            sideDisplay.append(element);           
         });
 
         sideDisplay.id= "sideContent";
@@ -330,8 +332,9 @@ class DestinationState{
         console.log(this.destination);
         this.destination.updateClothesRecomendation();
         this.machine.selectedDestination.push(this.destination);
+        this.machine.asideElements.push(this.destination.asHtmlElement());
 
-        if(this.machine.selectedDestination.length > 0){  // CHANGE THIS TO 4 AFTER TESTING
+        if(this.machine.selectedDestination.length > 1){  // CHANGE THIS TO 4 AFTER TESTING
             let newState =  new ConfirmDestinationState(this.machine);
             this.machine.state = newState;
             return newState.prompt();
