@@ -77,7 +77,13 @@ class LocationState{
     async execute(input){
 
         let locationData = await LocationFetcher.getLocation(input);
+
+        if(locationData.length == 0){
+            return "Sorry, I couldnt find the place you are talking about. Maybe try again or go for a different location?"
+        }
+
         let location = Location.getLocationsFromData(locationData);
+
 
         let newState = new ConfirmingLocationState(this.machine, location);
         this.machine.state = newState;
