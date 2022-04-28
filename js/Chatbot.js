@@ -416,7 +416,33 @@ class DeletingState{
     }
 
     execute(input){
-        //deletes selected index numbers.  
+        let selectedOption = Parser.getAllNumbersFromString(input)[0];
+
+        let returnOption = this.machine.selectedDestination.length+1;
+
+        console.log(selectedOption);
+        console.log(this.selection);
+        if(selectedOption == returnOption){
+            let newState = new TransitionState(this.machine);
+            this.machine.state = newState;
+            return newState.prompt();
+        }
+
+        if(this.selection.includes(selectedOption)){
+
+            let index = selectedOption - 1;
+            console.log(index);
+            
+            this.machine.selectedDestination.splice(index, 1);
+            console.log(this.machine.selectedDestination);
+
+            this.machine.asideElements.splice(index, 1);
+
+            return this.prompt();
+        }
+
+        return "Invalid input, please select a valid option.";
+
     }
 
     prompt(){
