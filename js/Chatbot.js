@@ -26,6 +26,7 @@ export default class Chatbot{
     }
 
     getAsideElements(){
+        this.updateAside = false;
         return this.asideElements;
     }
 }
