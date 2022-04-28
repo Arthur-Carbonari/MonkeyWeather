@@ -66,7 +66,11 @@ export default class Chatbox{
      * This methods scrolls the chatbox all the way down.
      */
     scrollChatbox(){
-        this.chatbox.scrollTop = this.chatbox.scrollHeight;
+        this.chatbox.scrollTo({
+            top: this.chatbox.scrollHeight,
+            behavior: "smooth"
+        });
+        //this.chatbox.scrollTop = this.chatbox.scrollHeight;
     }
 
     updateSideContent(elements){
