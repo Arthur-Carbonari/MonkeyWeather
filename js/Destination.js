@@ -91,4 +91,18 @@ export default class Destination{
         return this.clothesRecomendation;
     }
 
+    asHtmlElement(){
+        let element = document.createElement("div");
+        element.classList.add("destination");
+
+        element.innerHTML = `<h3>${this.name}</h3>`;
+
+        this.forecast.forEach(forecast => {
+            element.append(forecast.asHtmlElement());
+        });
+
+
+        return element;
+    }
+
 }
