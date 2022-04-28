@@ -334,6 +334,25 @@ class DestinationState{
         this.machine.selectedDestination.push(this.destination);
         this.machine.asideElements.push(this.destination.asHtmlElement());
 
+        let newState = new TransitionState(this.machine);
+        this.machine.state = newState;
+        return newState.prompt();
+    }
+
+    prompt(){
+        return this.execute();
+    }
+}
+
+
+class TransitionState{
+    machine;
+
+    constructor(machine){
+        this.machine = machine;
+    }
+
+    execute(){
         if(this.machine.selectedDestination.length > 1){  // CHANGE THIS TO 4 AFTER TESTING
             let newState =  new ConfirmDestinationState(this.machine);
             this.machine.state = newState;
@@ -397,7 +416,7 @@ class DeletingState{
     }
 
     execute(input){
-        //deletes selected index numbers.
+        //deletes selected index numbers.  
     }
 
     prompt(){
