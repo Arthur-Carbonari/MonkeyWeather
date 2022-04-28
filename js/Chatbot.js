@@ -331,8 +331,10 @@ class DestinationState{
     execute(){
         console.log(this.destination);
         this.destination.updateClothesRecomendation();
+        
         this.machine.selectedDestination.push(this.destination);
         this.machine.asideElements.push(this.destination.asHtmlElement());
+        this.machine.updateSideDisplay = true;
 
         let newState = new TransitionState(this.machine);
         this.machine.state = newState;
@@ -497,7 +499,6 @@ class RecomendationState{
 
         console.log(this.machine.selectedDestination);
 
-        this.machine.updateSideDisplay = true;
 
         return recomendations.getMessage();
     }   
