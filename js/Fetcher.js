@@ -2,7 +2,7 @@ class Fetcher{
 
     static timeLimit = 4000;
 
-    static async fulfillWithTimeLimit(timeLimit, task, failureValue){
+    static async fetchWithTimeLimit(timeLimit, task, failureValue){
         let timeout;
         const timeoutPromise = new Promise((resolve, reject) => {
             timeout = setTimeout(() => {
@@ -38,7 +38,7 @@ class ForecastFetcher extends Fetcher{
 
         let call = fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lon}&exclude=${this.exclude}&units=metric&appid=${this.apiKey}`);
 
-        let response = await LocationFetcher.fulfillWithTimeLimit(this.timeLimit, call, "Failure");
+        let response = await LocationFetcher.fetchWithTimeLimit(this.timeLimit, call, "Failure");
 
         let weatherData = await response.json();
 
@@ -63,7 +63,7 @@ class LocationFetcher extends Fetcher{
 
         let call = fetch(`https://geocode.maps.co/search?city=${locationName}&accept-language=en`);
 
-        let response = await LocationFetcher.fulfillWithTimeLimit(this.timeLimit, call, "Failure");
+        let response = await LocationFetcher.fetchWithTimeLimit(this.timeLimit, call, "Failure");
 
         if(response === "Failure"){
             return response;
