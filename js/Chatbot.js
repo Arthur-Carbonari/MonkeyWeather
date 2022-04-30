@@ -239,7 +239,7 @@ class ForecastState{
         if(weatherData === "Failure"){
             let newState = new LocationState(this.machine);
             this.machine.state = newState;
-            
+
             return "Sorry, there was an issue with getting the details for the location you asked for, please select a different location or try again.";
         }
 
@@ -274,7 +274,7 @@ class DateState{
         this.destination = destination;
     }
     
-    async execute(input){
+    execute(input){
         
         let selectedOptions = Parser.getAllNumbersFromString(input);
 
