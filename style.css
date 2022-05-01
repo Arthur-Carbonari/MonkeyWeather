@@ -86,6 +86,7 @@ aside p{
     width:50%;
     margin: 1rem;
     background-color: rgba(242, 242,242,0.85);
+    min-height: 18.4px;
 }
 
 #botText{
@@ -122,4 +123,40 @@ aside p{
 
 #userInput:focus{ /*removes the outline border when typing inside userInput*/
     outline: none;
+}
+
+.typingMessage{
+    display: flex;
+    width: auto;
+}
+
+.typing {
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.7rem;
+    margin-right: 0rem;
+    box-sizing: border-box;
+    background: #555;
+    border-radius: 50%;
+    animation-duration: 2.2s !important;
+    margin: 0 0.03rem;
+}
+    
+.typing-1 { 
+    animation: typing 3s infinite;
+
+}
+.typing-2 { animation: typing 3s 250ms infinite; }
+.typing-3 { animation: typing 3s 500ms infinite; }
+
+@keyframes typing {
+	0%, 75%, 100% {
+		transform: translate(0, 0.35rem) scale(0.9);
+		opacity: 0.5;
+	}
+	
+	25% {
+		transform: translate(0, -0.25rem) scale(0.9);
+		opacity: 1;
+	}
 }
