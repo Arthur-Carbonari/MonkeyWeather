@@ -2,22 +2,28 @@ body{
     font-family:" Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
     padding:0;
     margin:0;
-  }
-
-  main{
-    background-image: url("backgroundPattern.jpg") ;
-    background-repeat: repeat;
     height: 100vh;
+}
+
+header{
+    position: fixed;
+    width: 100%;
+}
+
+main{
     width: 100%;
     display: flex;
     flex-direction: row;
+    background-image: url("Dark Ocean.jpg");
+    background-repeat: repeat;
+    margin-bottom: 5rem;
 }
 
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
   }
-  
+
  /* Track */
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey;
@@ -29,39 +35,46 @@ body{
     border-radius: 10px;
   }
 
-#chatBox{
+#chat{
     width:70%;
-    height: 92vh;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.3);
     overflow-y: scroll;
-}
-
-#chatBox header{
-    background-color: #292929;
-    padding: 0.25rem;
-    letter-spacing: 0.5px;
-    color:#fff;
-
-}
-
-aside{
-    justify-self: flex-start;
-    width: 30%;
-    background-color: rgb(250, 244, 193);
     height: 100vh;
 }
 
-aside header{
-    padding: 0.25rem;
-    background-color: #292929;
-    border-bottom: 1px solid #dedcc7;
-    color: #fff;
-
+#chatHeader{
+    position: fixed;
+    width: 61rem;
+    margin:0;
+    background-color: aliceblue;
+    padding: 1rem;
+    border-left: 1px solid white;
 }
 
-aside p{
+#chatBox{
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+aside{
+    width: 30%;
+    height: 100vh;
+    overflow:auto ;
+    color: #ffffff;
+}
+
+#asideHeader{
+    margin:0;
+    background-color: aliceblue;
+    padding: 1rem;
+    margin: 0;
+    color: #000;
+    position: fixed;
+    width: 25rem;
+  }
+
+  #sideContent{
+    margin-top:4rem;
     padding: 1rem;
 }
 
@@ -88,6 +101,7 @@ aside p{
     background-color: rgba(242, 242,242,0.85);
 }
 
+
 #botText{
     display: inline;
 }
@@ -95,19 +109,17 @@ aside p{
 #sendText{
     position: absolute;
     bottom: 0;
+    right:0;
     width: 70%;
-    border-top: 0;
-    height: 4rem;
-    background-color: #292929;
-
+    height:4rem;
+    background-color: rgba(242, 242,242,0.5);
+    border-radius: 5px;
 }
 
 #sendButton{
     padding: 0.8rem;
     border-radius: 20px;
     border: 0;
-    background-color: rgb(30, 102, 52);
-    color: #ffffff;
 }
 
 #userInput{

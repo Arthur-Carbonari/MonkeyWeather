@@ -9,11 +9,8 @@
 </head>
 <body>
     <main>
-        <div id="chatBox">
-            <div class="botMessage"><p id = "botText">Hi im the bot</p></div>
-        </div>
-        <aside id="sideDisplay">            
-            <h2>MonkeyWeather</h2>
+        <aside id="sideDisplay">
+            <h2 id="asideHeader">Information for your trip</h2>
             <div id="sideContent">
                 <div class="destination"><h3>London, City of London, Greater London, England, United Kingdom</h3>
                     <div class="forecast">
@@ -73,8 +70,14 @@
                 </div>
             </div>
         </aside>
+        <div id="chat">
+            <h2 id="chatHeader">WeatherMonkey</h2>
+            <div id="chatBox">
+                <div class="botMessage"><p id = "botText">Hi im the bot</p></div>
+            </div>
+        </div>
     </main>
-    <div id ="sendText"> 
+    <div id ="sendText">
         <input id="userInput" type="text" placeholder="Hey you! Type here to chat with me... " autofocus="true">
         <button id="sendButton" type="submit"> Send </button>
     </div>
