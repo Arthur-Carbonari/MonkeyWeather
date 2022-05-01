@@ -15,6 +15,8 @@ export default class Chatbox{
      */
     sideContent;
 
+    typingMessage;
+
     /**
      * @param {DOMElement} chatbox - HTML element where the messages are going to be displayed in.
      * @param {DOMElement} inputField - HTML element where the user will write his input in.
@@ -23,6 +25,15 @@ export default class Chatbox{
         this.chatbox = chatbox;
         this.inputField = inputField;
         this.sideContent = sideContent;
+
+        let typingMessage = document.createElement("div");
+
+        typingMessage.classList.add("botMessage");
+        typingMessage.classList.add("typingMessage");
+
+        typingMessage.innerHTML = '<span class="typing typing-1"></span><span class="typing typing-2"></span><span class="typing typing-3"></span>';
+
+        this.typingMessage = typingMessage;
     }
 
     /**
