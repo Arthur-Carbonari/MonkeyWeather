@@ -90,4 +90,10 @@ export default class Chatbox{
             this.sideContent.append(element);
         });
     }
+
+    startTypingAnimation(){
+
+        this.chatbox.appendChild(this.typingMessage);
+
+    }
 }
