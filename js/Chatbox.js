@@ -96,4 +96,10 @@ export default class Chatbox{
         this.chatbox.appendChild(this.typingMessage);
 
     }
+
+    finishTypingAnimation(){
+        this.chatbox.removeChild(this.typingMessage);
+
+        
+    }
 }
