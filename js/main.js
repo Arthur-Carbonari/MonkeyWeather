@@ -5,6 +5,9 @@ const messagesView = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
 const sideContent = document.getElementById("sideContent");
 
+const minimumResponseTime = 1000; //miliseconds
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+
 const chatbox = new Chatbox(messagesView, userInputField, sideContent);
 
 
@@ -34,11 +37,22 @@ document.getElementById("sendButton").addEventListener("click", () => {
 
 async function  handleInput(userInput) {
     chatbox.updateChatbox(userInput, "userMessage");
+    
+    chatbox.startTypingAnimation();
+
     chatbox.scrollChatbox();
 
-    //botResponse = await getBotResponse(userInput);
+    let startTime = + new Date();
+
     let botResponse = await chatbot.getBotResponse(userInput);
-    requestNumber++;
+    
+    let reponseTime = + new Date() - startTime;
+
+    if(reponseTime < minimumResponseTime){
+        await sleep(minimumResponseTime - reponseTime);
+    }
+
+    chatbox.finishTypingAnimation();
 
     if(chatbot.updateAside){
         let asideElements = chatbot.getAsideElements();
