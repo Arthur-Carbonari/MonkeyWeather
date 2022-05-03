@@ -1,6 +1,15 @@
 import Chatbox from './Chatbox.js';
 import Chatbot from './Chatbot.js';
 
+
+const body = document.querySelector('body');
+const hamburgerButton = document.getElementById('hamburgerButton');
+
+hamburgerButton.addEventListener('click', () =>{
+    body.classList.toggle('showAside');
+});
+
+
 const messagesView = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
 const sideContent = document.getElementById("sideContent");
