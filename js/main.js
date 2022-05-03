@@ -13,7 +13,6 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 const chatbox = new Chatbox(messagesView, userInputField, sideContent);
 const chatbot = new Chatbot();
-console.log(chatbox);
 
 
 
@@ -33,7 +32,6 @@ function getInputFromText(){
     let userInput = chatbox.getInput();
 
     if(userInput.trim() == ""){
-        console.log("empty input return");
         return;
     }
 
