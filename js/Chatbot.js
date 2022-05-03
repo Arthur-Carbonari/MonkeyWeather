@@ -76,11 +76,13 @@ class LocationState{
 
     async execute(input){
 
-        let locationData = await LocationFetcher.getLocation(input);
+        let response = await LocationFetcher.getLocation(input);
 
-        if(locationData === "Failure"){
+        if(response === "Failure"){
             return "Sorry, there was an issue with finding the location you asked for, please try again";
         }
+
+        let locationData = await response.json();
 
         if(locationData.length == 0){
             return "Sorry, I couldnt find the place you are talking about. Maybe try again or go for a different location?"
@@ -234,16 +236,18 @@ class ForecastState{
     }
 
     async execute(){
-        let weatherData = await ForecastFetcher.getForecastData(this.destination);
+        let response = await ForecastFetcher.getForecastData(this.destination);
 
-        if(weatherData === "Failure"){
+        if(response === "Failure"){
             let newState = new LocationState(this.machine);
             this.machine.state = newState;
 
             return "Sorry, there was an issue with getting the details for the location you asked for, please select a different location or try again.";
         }
 
-        let parsedForecast = Forecast.getForecastsFromData(weatherData);
+        let forecastJSON = await response.json();
+
+        let parsedForecast = Forecast.getForecastsFromData(forecastJSON);
 
         this.destination.forecast = parsedForecast;
     
