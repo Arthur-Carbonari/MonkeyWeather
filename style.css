@@ -1,142 +1,168 @@
-body{
-    font-family:" Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
-    padding:0;
-    margin:0;
+body {
+    overflow: hidden;
+    font-family: " Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+    padding: 0;
+    margin: 0;
     height: 100vh;
 }
 
-header{
+header {
     position: fixed;
     width: 100%;
 }
 
-main{
+main {
+    height: 100vh;
     width: 100%;
+    overflow: hidden;
     display: flex;
     flex-direction: row;
     background-image: url("Dark Ocean.jpg");
     background-repeat: repeat;
-    margin-bottom: 5rem;
 }
 
-/* width */
+main header {
+    position: fixed;
+    top: 0;
+    background-color: aliceblue;
+
+    height: 7vh;
+}
+
+/*width */
 ::-webkit-scrollbar {
     width: 10px;
-  }
+}
 
- /* Track */
+
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey;
     border-radius: 10px;
-  }
+}
 
-  ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: rgb(82, 78, 78);
     border-radius: 10px;
-  }
-
-#chat{
-    width:70%;
-    overflow-y: scroll;
-    height: 100vh;
 }
 
-#chatHeader{
-    position: fixed;
-    width: 61rem;
-    margin:0;
-    background-color: aliceblue;
-    padding: 1rem;
-    border-left: 1px solid white;
+#chat {
+    /* width:70%; */
+    flex-grow: 1;
 }
 
-#chatBox{
-    margin-top: 4rem;
+#chatHeader {
+    width: 70%;
+    margin: 0;
+    /* border-left: 1px solid white; */
+    height: 3vh;
+    display: inline-block;
+    padding-top: 1.5vh;
+    padding-left: 1%;
+}
+
+#chatBox {
+    margin-top: 7vh;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    padding-bottom: 9vh;
+    height: 84vh;
 }
 
-aside{
+aside {
     width: 30%;
-    height: 100vh;
-    overflow:auto ;
+
+
     color: #ffffff;
 }
 
-#asideHeader{
-    margin:0;
-    background-color: aliceblue;
-    padding: 1rem;
+#asideHeader {
+    margin: 0;
+
     margin: 0;
     color: #000;
-    position: fixed;
-    width: 25rem;
-  }
 
-  #sideContent{
-    margin-top:4rem;
-    padding: 1rem;
+
+    padding-top: 1.5vh;
+    padding-left: 1%;
+    display: inline-block;
 }
 
-.userMessage{
+#sideContent {
+    margin-top: 7vh;
+
+    overflow-y: scroll;
+    height: 87vh;
+    padding: 4vh 5%;
+}
+
+.userMessage {
     align-self: flex-end;
     padding: 0.5rem;
     border-radius: 10px;
     border: 1px solid black;
     margin: 1rem;
-    background-color: rgba(242, 242,242,0.85);
+    background-color: rgba(242, 242, 242, 0.85);
 }
 
-#userText{
+#userText {
     display: inline;
 }
 
-.botMessage{
+.botMessage {
     align-self: flex-start;
     padding: 0.5rem;
     border-radius: 10px;
     border: 1px solid black;
-    width:50%;
+    width: 50%;
     margin: 1rem;
-    background-color: rgba(242, 242,242,0.85);
+    background-color: rgba(242, 242, 242, 0.85);
 }
 
 
-#botText{
+#botText {
     display: inline;
 }
 
-#sendText{
+#sendText {
     position: absolute;
     bottom: 0;
-    right:0;
+    right: 0;
     width: 70%;
-    height:4rem;
-    background-color: rgba(242, 242,242,0.5);
+    height: 9vh;
+    background-color: rgba(242, 242, 242, 0.5);
     border-radius: 5px;
+    display: flex;
 }
 
-#sendButton{
+#sendButton {
     padding: 0.8rem;
     border-radius: 20px;
     border: 0;
+    height: 2.7rem;
+    align-self: center;
+    width: 6%;
+    margin: 0 1%;
 }
 
-#userInput{
-    width: 90%;
-     padding: 0.5rem;
-     margin: 0.5rem;
-     height: 1.7rem;
-     border-radius: 20px;
-     border: 1.2px solid #999966;
-     background-color: rgb(242, 242,242);
- }
+#userInput {
+    /* width: 90%; */
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    height: 1.7rem;
+    border-radius: 20px;
+    border: 1.2px solid #999966;
+    background-color: rgb(242, 242, 242);
+    align-self: center;
+    flex-grow: 1;
+}
 
-#userInput:focus{ /*removes the outline border when typing inside userInput*/
+#userInput:focus {
+    /*removes the outline border when typing inside userInput*/
     outline: none;
 }
 
-.typingMessage{
+.typingMessage {
     display: flex;
     width: auto;
 }
@@ -152,22 +178,31 @@ aside{
     animation-duration: 2.2s !important;
     margin: 0 0.03rem;
 }
-    
-.typing-1 { 
+
+.typing-1 {
     animation: typing 3s infinite;
 
 }
-.typing-2 { animation: typing 3s 250ms infinite; }
-.typing-3 { animation: typing 3s 500ms infinite; }
+
+.typing-2 {
+    animation: typing 3s 250ms infinite;
+}
+
+.typing-3 {
+    animation: typing 3s 500ms infinite;
+}
 
 @keyframes typing {
-	0%, 75%, 100% {
-		transform: translate(0, 0.35rem) scale(0.9);
-		opacity: 0.5;
-	}
-	
-	25% {
-		transform: translate(0, -0.25rem) scale(0.9);
-		opacity: 1;
-	}
+
+    0%,
+    75%,
+    100% {
+        transform: translate(0, 0.35rem) scale(0.9);
+        opacity: 0.5;
+    }
+
+    25% {
+        transform: translate(0, -0.25rem) scale(0.9);
+        opacity: 1;
+    }
 }
