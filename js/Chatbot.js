@@ -8,9 +8,6 @@ import Input from "./Input.js";
 
 export default class Chatbot{
     
-    clothesRecomendations = new ClothesRecomendations();
-
-    
     state;
     selectedDestination = [];
 
@@ -62,7 +59,7 @@ class StartState{
     }
 
     prompt(){
-        return "Hi, I'm the weather bot, please select one of the selectedOptions bellow or tell me if you want to begin with your locations.";
+        return "Hi, I'm Weather the monkey, im here to help you choose clothes for your 3 day trip.<br>Please tell me when you are ready to begin.";
     }
 }
 
@@ -167,7 +164,6 @@ class AlternativeLocationState{
 
         input = Parser.getAllNumbersFromString(input);
 
-        console.log(input);
         if(input === null) return "Please select a valid option";
 
         input =  parseInt(input[0]);
@@ -349,7 +345,6 @@ class DestinationState{
 
 
     execute(){
-        console.log(this.destination);
         this.destination.updateClothesRecomendation();
 
         this.machine.selectedDestination.push(this.destination);
@@ -445,7 +440,11 @@ class DeletingState{
     }
 
     execute(input){
-        let selectedOption = Parser.getAllNumbersFromString(input)[0];
+        let selectedOption = Parser.getAllNumbersFromString(input);
+
+        if(selectedOption === null) return "Invalid input, please select a valid option.";
+        
+        selectedOption = selectedOption[0];
 
         let returnOption = this.machine.selectedDestination.length+1;
 
@@ -460,7 +459,6 @@ class DeletingState{
             let index = selectedOption - 1;
             
             this.machine.selectedDestination.splice(index, 1);
-            console.log(this.machine.selectedDestination);
 
             this.machine.asideElements.splice(index, 1);
             this.machine.updateAside = true;
@@ -505,20 +503,14 @@ class RecomendationState{
     }
 
     execute(input){
-        console.log("test from here");
         let recomendations = new ClothesRecomendations();
 
-        console.log(this.destinations);
 
         for (let i = 0; i < this.destinations.length; i++) {
             recomendations.combineRecomendations(this.destinations[i].clothesRecomendation);
-            console.log(recomendations);
         }
 
-        console.log(recomendations);
-
-        console.log(this.machine.selectedDestination);
-
+        this.machine.state = new FinalState(this.machine);
 
         return recomendations.getMessage();
     }   
@@ -527,4 +519,29 @@ class RecomendationState{
     prompt(){
         return this.execute();
     }
+}
+
+
+class FinalState{
+    machine;
+
+    constructor(machine){
+        this.machine = machine;
+    }
+
+    execute(input){
+
+        if(input == "reset"){
+            this.machine.selectedDestination = [];
+            this.machine.asideElements = [];
+            this.machine.state = new LocationState(this.machine);
+            this.machine.updateAside = true;
+            return this.machine.state.prompt();
+        }
+
+        return "To reset the chat and start picking your locations again please say 'reset'";
+
+
+    }
+
 }
