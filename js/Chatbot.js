@@ -4,6 +4,7 @@ import { ForecastFetcher, LocationFetcher } from "./Fetcher.js";
 import Destination from "./Destination.js";
 import Location from "./Location.js";
 import ClothesRecomendations from "./ClothesRecomendations.js";
+import Input from "./Input.js";
 
 export default class Chatbot{
     
@@ -117,7 +118,7 @@ class ConfirmingLocationState{
 
     execute(input){
 
-        if(input === "yes"){
+        if(Input.isPositive(input)){
             let destination = new Destination(this.location[0]);
 
             let newState = new ForecastState(this.machine, destination);
@@ -125,7 +126,7 @@ class ConfirmingLocationState{
 
             return newState.prompt();
         }
-        else {
+        else if(Input.isNegative(input)){
             
             this.location.shift();
             let newState = new AlternativeLocationState(this.machine, this.location);
@@ -134,11 +135,15 @@ class ConfirmingLocationState{
             return newState.prompt();
 
         }
+        else{
+
+            return "Sorry, I didnt really undestand.<br>" + this.prompt();
+        }
 
     }
 
     prompt(){
-        return "Oh so do you wanna go to " + this.location[0].name + "?";
+        return "Do you wanna go to " + this.location[0].name + "?";
     }
 
 
@@ -380,7 +385,7 @@ class TransitionState{
         let newState = new LocationState(this.machine);
         this.machine.state = newState;
 
-        return "Ok, I have added that destination to your list.<br>Please Select your next destination.";
+        return "Ok, I updated your itenerary.<br>Please Select your next destination.";
     }
 
     prompt(){
@@ -403,13 +408,15 @@ class ConfirmDestinationState{
     execute(input){
         let newState;
 
-        if(input === "yes"){
+        if(Input.isPositive(input)){
             newState = new RecomendationState(this.machine);
         }
 
-        if(input == "no"){
+        else if(Input.isNegative(input)){
             newState = new DeletingState(this.machine);
         }
+
+        else return "Sorry, I didnt really undestand.";
 
         this.machine.state = newState;
         return newState.prompt();
