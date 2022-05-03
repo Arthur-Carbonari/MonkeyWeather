@@ -40,9 +40,7 @@ class ForecastFetcher extends Fetcher{
 
         let response = await LocationFetcher.fetchWithTimeLimit(this.timeLimit, call, "Failure");
 
-        let weatherData = await response.json();
-
-        return await weatherData;
+        return "Failure";
     }
 
 
@@ -65,13 +63,7 @@ class LocationFetcher extends Fetcher{
 
         let response = await LocationFetcher.fetchWithTimeLimit(this.timeLimit, call, "Failure");
 
-        if(response === "Failure"){
-            return response;
-        }
-        
-        let locationData = await response.json();
-
-        return locationData;
+        return response;
     }
 
 }
