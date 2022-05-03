@@ -88,14 +88,14 @@ export default class Forecast{
     }
 
     asHtmlElement(){
-        let element = document.createElement("div");
+        let element = document.createElement("details");
         element.classList.add("forecast");
 
         let feels_like = this.feels_like;
 
-        let innerHtml =
+        element.innerHTML =
         `
-        <h3>${this.date}:</h3>
+        <summary>${this.date}:</summary>
         <p>${this.weatherDescription}</p>
         <h4>Feels Like Temperature:</h4>
         <ul>
@@ -106,7 +106,6 @@ export default class Forecast{
         </ul>
         `;
 
-        element.innerHTML = innerHtml;
 
         let clothesRecomendation = new ClothesRecomendations();
 
@@ -114,12 +113,10 @@ export default class Forecast{
         clothesRecomendation.updateByTemp(feels_like.day);
         clothesRecomendation.updateByTemp(feels_like.eve);
         clothesRecomendation.updateByTemp(feels_like.night);
+        clothesRecomendation.updateByWeather(this.weatherMain);
 
         element.append(clothesRecomendation.asHtmlElement());
 
-        
-
-        console.log(element);
 
         return element;
     }
