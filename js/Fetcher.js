@@ -40,7 +40,7 @@ class ForecastFetcher extends Fetcher{
 
         let response = await LocationFetcher.fetchWithTimeLimit(this.timeLimit, call, "Failure");
 
-        return "Failure";
+        return response;
     }
 
 
