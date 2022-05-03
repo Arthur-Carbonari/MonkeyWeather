@@ -4,35 +4,43 @@ import Chatbot from './Chatbot.js';
 const messagesView = document.getElementById("chatBox");
 const userInputField = document.getElementById("userInput");
 const sideContent = document.getElementById("sideContent");
+let takingInput = true;
+
 
 const minimumResponseTime = 1000; //miliseconds
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
+
 const chatbox = new Chatbox(messagesView, userInputField, sideContent);
-
-
 const chatbot = new Chatbot();
-
-let requestNumber = 0;
-let expectingDestinationsNames = false; 
-let numberOfLocationsSelected = 0;
-
+console.log(chatbox);
 
 
 
 userInputField.addEventListener("keydown", function (e) {
-    if (e.code == "Enter") {
-        let userInput = chatbox.retrieveInput();
-        handleInput(userInput);
+    if (e.code == "Enter" && takingInput) {
+        getInputFromText();
     }
 });
 
 document.getElementById("sendButton").addEventListener("click", () => {
-
-    let userInput = chatbox.retrieveInput();
-    handleInput(userInput);
+    if(takingInput) getInputFromText();
 });
 
+
+function getInputFromText(){
+    takingInput = false;
+    let userInput = chatbox.getInput();
+
+    if(userInput.trim() == ""){
+        console.log("empty input return");
+        return;
+    }
+
+    chatbox.emptyInputField();
+
+    handleInput(userInput);
+}
 
 
 async function  handleInput(userInput) {
@@ -61,6 +69,7 @@ async function  handleInput(userInput) {
 
     chatbox.updateChatbox(botResponse, "botMessage");
     chatbox.scrollChatbox();
+    takingInput = true;
 }
 
 
