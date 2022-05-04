@@ -29,7 +29,7 @@ main header {
 }
 
 #chat {
-    width:70%;
+    width: 70%;
 }
 
 #chatHeader {
@@ -58,7 +58,7 @@ main header {
 aside {
     background-color: rgba(2, 41, 87, 0.95);
     width: 30%;
-    border-right: 1px solid rgba(217, 213, 213,0.5) ;
+    border-right: 1px solid rgba(217, 213, 213, 0.5);
     color: #ffffff;
 }
 
@@ -207,25 +207,27 @@ aside {
 
 
 details {
-    
-    margin: 0 auto ;
+
+    margin: 0 auto;
     background: #202020;
-    
-    padding-left: 4%;box-shadow: 0 .1rem 1rem -.5rem rgba(0,0,0,.4);
-    
+
+    padding-left: 4%;
+    box-shadow: 0 .1rem 1rem -.5rem rgba(0, 0, 0, .4);
+
     overflow: hidden;
-  }
-  
-  summary {
+}
+
+summary {
     padding: 1rem;
     display: block;
     background: #333;
     padding-left: 2.2rem;
-    margin-left: -4%;position: relative;
+    margin-left: -4%;
+    position: relative;
     cursor: pointer;
-  }
-  
-  summary:before {
+}
+
+summary:before {
     content: '';
     border-width: .4rem;
     border-style: solid;
@@ -236,64 +238,113 @@ details {
     transform: rotate(0);
     transform-origin: .2rem 50%;
     transition: .25s transform ease;
-  }
-  
-  details[open] > summary:before {
+}
+
+details[open]>summary:before {
     transform: rotate(90deg);
-  }
-  
-  
-  details summary::-webkit-details-marker {
-    display:none;
-  }
-  
-  details > ul {
+}
+
+
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details>ul {
     padding-bottom: 1rem;
     margin-bottom: 0;
-  }
+}
 
-.destination{
+.destination {
     padding-top: 1rem;
     background-color: rgb(242 242 242 / 85%);
     margin-bottom: 1rem;
 }
 
-.destination h3{
+.destination h3 {
     padding-bottom: 1rem;
     padding-left: 2%;
     margin: 0;
     color: #000;
 }
 
+#hamburgerButton {
+    position: fixed;
+    top: 6vh;
+    right: 5%;
+    margin-left: -2em;
+    margin-top: -44px;
+    width: 2em;
+    height: 44px;
+    z-index: 10;
+    display: none;
+}
+
+#hamburgerButton div {
+    position: relative;
+    width: 3em;
+    height: 7px;
+    border-radius: 3px;
+    background-color: #fff;
+    margin-top: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+#toggle {
+    display: none;
+}
+
+#toggle:checked+#hamburgerButton .top-bun {
+    transform: rotate(-45deg);
+    margin-top: 25px;
+}
+
+#toggle:checked+#hamburgerButton .bottom-bun {
+    opacity: 0;
+    transform: rotate(45deg);
+}
+
+#toggle:checked+#hamburgerButton .meat {
+    transform: rotate(45deg);
+    margin-top: -7px;
+}
+
+#toggle:checked+#hamburgerButton+.nav {
+    top: 0;
+    transform: scale(1);
+}
+
 /* Mobile design */
 @media screen and (max-width:850px) {
-    main {   
+    main {
         background-image: url(images/background2.svg);
-        display: block; 
-        background-size: cover;      
+        display: block;
+        background-size: cover;
     }
 
-    main header{
+    main header {
         background-color: rgba(242, 242, 242, 0.25);
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         color: #fff;
     }
-    
-    #chatHeader{
+
+    #chatHeader {
         letter-spacing: 0.5rem;
         text-align: center;
     }
-    
-    #chat{
-        width: 100%;;
+
+    #chat {
+        width: 100%;
     }
-    
-    aside{
-        display: none ;
+
+
+    aside {
+        display: none;
+        z-index: 2;
+        width: 100%;
     }
-    
-    #sendText{
+
+    #sendText {
         width: 100%;
         position: absolute;
         bottom: 0;
@@ -302,5 +353,25 @@ details {
         height: 9vh;
         background-color: rgba(2, 41, 87, 0.95);
         border-top: 1px solid rgb(5, 19, 65);
+    }
+
+    #hamburgerButton {
+        display: block;
+    }
+
+    .showAside #hamburgerButton div{
+        background-color: #000;
+    }
+
+    .showAside aside {
+        display: block;
+    }
+
+    .showAside #chat {
+        display: none;
+    }
+
+    .showAside #sendText {
+        display: none;
     }
 }
