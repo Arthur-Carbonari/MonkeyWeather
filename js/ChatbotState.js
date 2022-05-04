@@ -7,7 +7,7 @@ import ClothesRecomendations from "./ClothesRecomendations.js";
 import Input from "./Input.js";
 import Chatbot from "./Chatbot.js";
 
-class ChatbotState{
+export default class ChatbotState{
     machine;
 
     constructor(machine){
